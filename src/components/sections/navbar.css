@@ -1,0 +1,365 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 60px 30px 0;
+  /* background: linear-gradient(90deg, #1c0c3f 0%, #0f0f2f 100%); */
+  /* border-bottom: 2px solid #2e2e50; */
+  position: relative;
+  flex-wrap: wrap;
+  max-width: 100%;
+  z-index: 2;
+}
+
+/* .logo1 img {
+  height: 30px;
+  z-index: 1;
+  
+} */
+
+.nav ul {
+  list-style: none;
+  display: flex;
+  gap: 40px;
+  margin: 0;
+  padding: 0;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.nav ul li {
+  color: white;
+  cursor: pointer;
+  position: relative;
+  transition: 0.3s ease;
+  padding-bottom: 10px;
+}
+
+.nav ul li::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0%;
+  height: 2px;
+  background-color: #b76aff;
+  transition: width 0.3s ease;
+}
+
+.nav ul li:hover {
+  color: #b76aff;
+}
+
+.nav ul li:hover::after {
+  width: 100%;
+}
+
+.ellipses {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transform: translateX(70px);
+  flex-wrap: wrap;
+  /* margin-right: 60px; */
+}
+
+.ellipse img,
+.ellipse1 img {
+  height: 40px;
+  width:46px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.ellipse:hover img,
+.ellipse1:hover img {
+  transform: scale(1.1);
+}
+.desktop-register button{
+  background: linear-gradient(354.17deg, #7129FF 3.91%, #FD00E3 72.59%);
+  border: none;
+  padding: 15px 50px;
+  color: white;
+  font-weight: 600;
+  border-radius: 12px;
+  cursor: pointer;
+  z-index: 1;
+  box-shadow: 0px 0px 10px #ff00ff5c;
+  transition: 0.3s ease;
+}
+
+.register button {
+  background: linear-gradient(354.17deg, #7129FF 3.91%, #FD00E3 72.59%);
+  border: none;
+  padding: 15px 50px;
+  color: white;
+  font-weight: 600;
+  border-radius: 12px;
+  cursor: pointer;
+  box-shadow: 0px 0px 10px #ff00ff5c;
+  transition: 0.3s ease;
+}
+
+.register button:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 0px 20px #ff00ff91;
+}
+.nav {
+  margin-left: 385px; 
+  z-index: 1;
+}
+@media (min-width: 1900px) and (max-width: 2100px) { 
+ .nav {
+    margin-left: 500px; 
+    z-index: 1;
+  }
+}
+@media (min-width: 2100px) { 
+ .nav {
+    margin-left: 550px; 
+    z-index: 1;
+  }
+}
+.nav ul li a {
+  color: inherit;
+  text-decoration: none;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+ 
+  .desktop-register {
+    display: block;
+  }
+
+/* Responsive for tablets */
+@media (max-width: 1024px) {
+  .container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start; /* ensures items align to left */
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+  }
+  .ellipses {
+    transform: none;
+    justify-content: center;
+  }
+
+  .desktop-register {
+    margin-left: auto; /* reset any right alignment */
+    margin-right: 0; /* pushes it left */
+    /* optional: move it before others in flex order */
+  }
+}
+
+
+/* Responsive for mobile */
+
+
+/* Extra small screens (phones) */
+@media (max-width: 480px) {
+  .nav ul li {
+    font-size: 14px;
+  }
+  .nav{
+    margin-left: 0;
+  }
+
+  .register button {
+    font-size: 14px;
+    padding: 8px 20px;
+  }
+
+  .container {
+    gap: 15px;
+  }
+}
+.hamburger {
+  display: none;
+  font-size: 28px;
+  color: white;
+  cursor: pointer;
+  z-index: 10;
+}
+
+/* Show hamburger on small screens */
+
+
+
+/* Add these new styles at the bottom of your existing CSS */
+@media (max-width: 480px) {
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 30px 40px;
+    /* border-bottom: 2px solid #2e2e50; */
+    position: relative;
+    flex-wrap: wrap;
+  }
+  
+  .logo1 {
+    display: flex;
+    justify-content: flex-start;
+    /* align-items: left; */
+    flex: 1;
+  }
+  
+  .logo1 img {
+    height: 25px;
+  }
+  
+  
+  .desktop-ellipses,
+  .desktop-register {
+    display: none;
+  }
+  
+  .mobile-extras {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    margin-top: 20px;
+  }
+  
+  .mobile-extras .ellipses {
+    transform: none;
+  }
+  
+  .mobile-extras .register button {
+    width: 100%;
+    max-width: 220px;
+  }
+}
+
+/* Ensure original ellipses and register stay visible above 480px */
+@media (min-width: 481px) {
+  .mobile-extras {
+    display: none;
+  }
+  
+  .desktop-ellipses {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    /* transform: translateX(70px); */
+  }
+  
+  /* .desktop-register {
+    display: block;
+    margin-right: -65px;
+  } */
+}
+
+@media (max-width: 768px) {
+  .hamburger {
+    display: block;
+    position: absolute;
+    top: 25px;
+    right: 25px;
+  }
+
+  .nav {
+    display: none;
+    width: 100%;
+    text-align: center;
+  }
+
+  .nav.active {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centers all items */
+    justify-content: center;
+    gap: 15px;
+  }
+
+  .nav ul {
+    flex-direction: column;
+    align-items: center; /* Keeps middle links + ellipsis centered */
+    gap: 10px;
+    padding: 20px 0;
+    border-radius: 10px;
+    margin-top: 15px;
+  }
+
+  /* Hide desktop ellipses and register */
+  .desktop-ellipses,
+  .desktop-register {
+    display: none !important;
+    visibility: hidden;
+  }
+
+  /* Ensure register button stays centered inside hamburger */
+  .desktop-register button {
+    display: block;
+    margin: 10px auto; /* centers horizontally */
+    width: auto; /* don’t stretch */
+  }
+}
+@media (min-width: 820px) and (max-width: 1023px) { 
+    .container {
+      padding: 20px 0 0 50px;
+      gap: 10px;
+    }
+    .nav {
+        margin-left: 205px;
+    }
+    .nav ul {
+      gap: 15px;
+    }
+    .left h1 {
+        font-size: 1.8rem;
+    }
+}
+@media (min-width: 1024px) and (max-width: 1279px) { 
+    .nav {
+      margin-left: 350px;
+    }
+
+   .container {
+      padding: 30px 0 0px;
+    }
+}
+@media (min-width: 1536px) and (max-width: 1744px) { 
+  .container {
+    padding: 100px 75px 0 140px;
+  }
+}
+@media (min-width: 1745px) and (max-width: 1900px) { 
+  .container {
+    padding: 100px 120px 0 200px;
+  }
+}
+@media (min-width: 1900px) and (max-width: 2100px) { 
+  .container {
+    padding: 60px 80px 0 180px;
+  }
+}
+@media (min-width: 2100px) and (max-width: 2300px){ 
+  .container {
+    padding: 100px 310px 0 250px;
+  }
+}
+@media (min-width: 2300px) and (max-width: 2400px){ 
+  .container {
+    padding: 100px 445px 0 380px;
+  }
+}
+@media (min-width: 2400px) and (max-width: 2560px){ 
+  .container {
+    padding: 100px 515px 0 415px;
+  }
+}
+@media (min-width: 2561px) and (max-width: 2880px){ 
+  .container {
+    padding: 100px 690px 0 620px;
+  }
+}
+@media (min-width: 2881px) { 
+  .container {
+    padding: 100px 840px 0 1010px;
+  }
+}
