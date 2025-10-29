@@ -1,8 +1,8 @@
 "use client";
 
 import React from "react";
-import { DashboardLayout } from "@/components/templates/DashboardLayout";
+import { DashboardContent } from "@/components/organisms/DashboardContent";
 
 export default function DashboardPage() {
-  return <DashboardLayout />;
+  return <DashboardContent />;
 }

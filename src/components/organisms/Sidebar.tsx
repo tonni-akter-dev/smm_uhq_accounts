@@ -1,6 +1,8 @@
 'use client';
 
 import * as React from 'react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import { Typography } from '@/components/atoms/Typography';
 import {
@@ -18,100 +20,85 @@ import {
   Undo2,
   Megaphone,
   BarChart3,
-  X
+  X,
 } from 'lucide-react';
 import { Button } from '@/components/atoms/Button';
 
-type PageType =
-  | 'dashboard'
-  | 'manage-users'
-  | 'orders'
-  | 'services'
-  | 'refill'
-  | 'tickets'
-  | 'providers'
-  | 'subscriptions'
-  | 'affiliate'
-  | 'panels'
-  | 'refunds'
-  | 'broadcast'
-  | 'reports';
+const navigationItems = [
+  { icon: LayoutDashboard, label: 'Dashboard', href: '/admin/dashboard' },
+  { icon: Users, label: 'Manage Users', href: '/admin/dashboard/manage-users' },
+  { icon: ShoppingCart, label: 'Orders Management', href: '/admin/dashboard/orders' },
+  { icon: CreditCard, label: 'Manual Payments', href: '/admin/dashboard/payments' },
+  { icon: RefreshCw, label: 'Refill Requests', href: '/admin/dashboard/refill' },
+  { icon: HelpCircle, label: 'Tickets Support', href: '/admin/dashboard/tickets' },
+  { icon: Settings, label: 'Services & Categories', href: '/admin/dashboard/services' },
+  { icon: Database, label: 'Providers (API Integrations)', href: '/admin/dashboard/providers' },
+  { icon: Zap, label: 'Subscriptions', href: '/admin/dashboard/subscriptions' },
+  { icon: UserCheck, label: 'Affiliate System', href: '/admin/dashboard/affiliate' },
+  { icon: PanelLeft, label: 'Child Panels', href: '/admin/dashboard/panels' },
+  { icon: Undo2, label: 'Refund Requests', href: '/admin/dashboard/refunds' },
+  { icon: Megaphone, label: 'Broadcast Messages', href: '/admin/dashboard/broadcast' },
+  { icon: BarChart3, label: 'Reports & Logs', href: '/admin/dashboard/reports' },
+];
+
 interface SidebarProps {
   isOpen: boolean;
   onToggle: () => void;
-  currentPage: string;
-  onNavigate: (page: PageType) => void;
 }
 
-const navigationItems = [
-  { icon: LayoutDashboard, label: 'Dashboard', key: 'dashboard' },
-  { icon: Users, label: 'Manage Users', key: 'manage-users' },
-  { icon: ShoppingCart, label: 'Orders Management', key: 'orders' },
-  { icon: CreditCard, label: 'Manual Payments', key: 'payments' },
-  { icon: RefreshCw, label: 'Refill Requests', key: 'refill' },
-  { icon: HelpCircle, label: 'Tickets Support', key: 'tickets' },
-  { icon: Settings, label: 'Services & Categories', key: 'services' },
-  { icon: Database, label: 'Providers (API Integrations)', key: 'providers' },
-  { icon: Zap, label: 'Subscriptions', key: 'subscriptions' },
-  { icon: UserCheck, label: 'Affiliate System', key: 'affiliate' },
-  { icon: PanelLeft, label: 'Child Panels', key: 'panels' },
-  { icon: Undo2, label: 'Refund Requests', key: 'refunds' },
-  { icon: Megaphone, label: 'Broadcast Messages', key: 'broadcast' },
-  { icon: BarChart3, label: 'Reports & Logs', key: 'reports' }
-];
+export function Sidebar({ isOpen, onToggle }: SidebarProps) {
+  const pathname = usePathname();
 
-export function Sidebar({ isOpen, onToggle, currentPage, onNavigate }: SidebarProps) {
   return (
     <>
       {/* Mobile Overlay */}
-      {isOpen && <div className='fixed inset-0 z-40 bg-black/50 lg:hidden' onClick={onToggle} />}
+      {isOpen && <div className="fixed inset-0 z-40 bg-black/50 lg:hidden" onClick={onToggle} />}
 
       {/* Sidebar */}
       <div
         className={cn(
-          // Light: card background with subtle border; Dark: brand gradient
           'sidebar-transition fixed top-0 left-0 z-50 h-full w-64 bg-card border-r border-border dark:bg-[#1C192A] lg:translate-x-0',
           isOpen ? 'translate-x-0' : '-translate-x-full'
         )}
       >
         {/* Header */}
-        <div className='flex items-center justify-between border-b border-border/60 dark:border-purple-700 p-6'>
-          <div className='flex items-center space-x-3'>
-            <div className='flex h-8 w-8 items-center justify-center rounded-lg bg-foreground/10 dark:bg-white'>
-              <span className='text-lg font-bold text-foreground dark:text-purple-900'>U</span>
+        <div className="flex items-center justify-between border-b border-border/60 dark:border-purple-700 p-6">
+          <div className="flex items-center space-x-3">
+            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-foreground/10 dark:bg-white">
+              <span className="text-lg font-bold text-foreground dark:text-purple-900">U</span>
             </div>
             <div>
-              <Typography variant='h6' className='font-bold text-foreground'>
+              <Typography variant="h6" className="font-bold text-foreground">
                 UHQ
               </Typography>
-              <Typography variant='small' className='text-muted-foreground'>
+              <Typography variant="small" className="text-muted-foreground">
                 SMM
               </Typography>
             </div>
           </div>
           <Button
-            variant='ghost'
-            size='icon'
+            variant="ghost"
+            size="icon"
             onClick={onToggle}
-            className='text-foreground hover:bg-accent lg:hidden'
+            className="text-foreground hover:bg-accent lg:hidden"
           >
-            <X className='h-5 w-5' />
+            <X className="h-5 w-5" />
           </Button>
         </div>
 
         {/* Navigation */}
         <nav
           className="
-    mobile-sidebar-scroll 
-    flex-1 
-    overflow-y-auto 
-    py-4 
-    scrollbar-thin 
-    scrollbar-thumb-purple-700/60 
-    scrollbar-track-transparent 
-    max-h-screen 
-    sm:max-h-[calc(100vh-4rem)]
-  "
+            mobile-sidebar-scroll 
+            flex-1 
+            overflow-y-auto 
+            py-4 
+            scrollbar-thin 
+            scrollbar-thumb-purple-700/60 
+            scrollbar-track-transparent 
+            max-h-screen 
+            sm:max-h-[calc(100vh-4rem)]
+          "
         >
           {/* Section Title */}
           <div className="mb-4 px-4">
@@ -127,12 +114,13 @@ export function Sidebar({ isOpen, onToggle, currentPage, onNavigate }: SidebarPr
           <div className="space-y-1 px-2">
             {navigationItems.map((item, index) => {
               const Icon = item.icon;
-              const isActive = currentPage === item.key;
+              const isActive = pathname === item.href;
 
               return (
-                <button
+                <Link
                   key={index}
-                  onClick={() => onNavigate(item.key as PageType)}
+                  href={item.href}
+                  onClick={onToggle}
                   className={cn(
                     'flex w-full items-center space-x-3 rounded-lg px-4 py-3 text-left transition-all duration-200 hover:scale-[1.02]',
                     isActive
@@ -144,12 +132,11 @@ export function Sidebar({ isOpen, onToggle, currentPage, onNavigate }: SidebarPr
                   <Typography variant="small" className="truncate font-medium">
                     {item.label}
                   </Typography>
-                </button>
+                </Link>
               );
             })}
           </div>
         </nav>
-
       </div>
     </>
   );

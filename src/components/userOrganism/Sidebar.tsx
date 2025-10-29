@@ -20,27 +20,13 @@ import {
   X
 } from 'lucide-react';
 import { Button } from '@/components/atoms/Button';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
-type PageType =
-  | 'dashboard'
-  | 'new-orders'
-  | 'bulk-order'
-  | 'services'
-  | 'order-history'
-  | 'subscription'
-  | 'refill-history'
-  | 'funds'
-  | 'vip-subscription'
-  | 'affiliate'
-  | 'ticket-support'
-  | 'child-panel'
-  | 'refunds'
-  | 'api';
+
 interface SidebarProps {
   isOpen: boolean;
   onToggle: () => void;
-  currentPage: string;
-  onNavigate: (page: PageType) => void;
 }
 
 const navigationItems = [
@@ -60,7 +46,17 @@ const navigationItems = [
   { icon: BarChart3, label: 'API', key: 'api' }
 ];
 
-export function Sidebar({ isOpen, onToggle, currentPage, onNavigate }: SidebarProps) {
+export function Sidebar({ isOpen, onToggle }: SidebarProps) {
+  const pathname = usePathname();
+  
+  // Extract the current page from the pathname
+  const getCurrentPage = () => {
+    const pathSegments = pathname.split('/');
+    return pathSegments[pathSegments.length - 1] || 'dashboard';
+  };
+
+  const currentPage = getCurrentPage();
+
   return (
     <>
       {/* Mobile Overlay */}
@@ -130,9 +126,9 @@ export function Sidebar({ isOpen, onToggle, currentPage, onNavigate }: SidebarPr
               const isActive = currentPage === item.key;
 
               return (
-                <button
+                <Link
                   key={index}
-                  onClick={() => onNavigate(item.key as PageType)}
+                  href={`/user/dashboard/${item.key === 'dashboard' ? '' : item.key}`}
                   className={cn(
                     'flex w-full items-center space-x-3 rounded-lg px-4 py-3 text-left transition-all duration-200 hover:scale-[1.02]',
                     isActive
@@ -144,7 +140,7 @@ export function Sidebar({ isOpen, onToggle, currentPage, onNavigate }: SidebarPr
                   <Typography variant="small" className="truncate font-medium">
                     {item.label}
                   </Typography>
-                </button>
+                </Link>
               );
             })}
           </div>
