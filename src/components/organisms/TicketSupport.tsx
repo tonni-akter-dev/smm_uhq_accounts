@@ -23,7 +23,7 @@ export function TicketSupport() {
             <div>
               <h3 className="font-semibold text-purple-400 mb-2">Ticket Information</h3>
               <div className="border border-white/10 rounded-lg overflow-hidden">
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-6 divide-y divide-white/5">
+                <div className="grid grid-cols-1  md:grid-cols-2 gap-x-6 divide-y divide-white/5">
                   {[
                     { label: 'Order ID', value: '#12348' },
                     { label: 'Order Link', value: 'https://example.com/post/123' },

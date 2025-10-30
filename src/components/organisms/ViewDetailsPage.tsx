@@ -1,24 +1,24 @@
 'use client';
 
 import * as React from 'react';
-import { Card, CardContent} from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
 
 
 
 interface UserDetailsModalProps {
-  isOpen: boolean;
-  onClose: () => void;
+    isOpen: boolean;
+    onClose: () => void;
 
 }
 
 export function ViewDetailsPage({
-  isOpen,
-  onClose
+    isOpen,
+    onClose
 }: UserDetailsModalProps) {
 
     console.log(isOpen)
 
-  
+
 
     return (
         <div className='space-y-6 p-4 sm:p-6 lg:space-y-8'>
@@ -108,6 +108,12 @@ export function ViewDetailsPage({
                                 Not worked with this provider
                             </p>
                         </div>
+                    </div>
+
+                    <div className='mt-4 flex gap-2 justify-end items-center'>
+                        <button className='bg-[#FD00E3] rounded-[20px] px-4 py-2'>Approve</button>
+                        <button className='bg-[#1C192A] rounded-[20px] px-4 py-2'>Reject</button>
+                        <button className='bg-[#1C192A] rounded-[20px] px-4 py-2'>Mark as Refilled</button>
                     </div>
                 </CardContent>
             </Card>

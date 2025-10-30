@@ -277,15 +277,6 @@ export function OrdersManagement() {
           </div>
         </CardContent>
       </Card>
-
-      {/* Order Details Modal */}
-      <UserDetailsModal
-        isOpen={isModalOpen}
-        onClose={handleCloseModal}
-        user={selectedUser}
-        onEdit={handleEdit}
-        onDelete={handleDelete}
-      />
     </div>
   );
 }
