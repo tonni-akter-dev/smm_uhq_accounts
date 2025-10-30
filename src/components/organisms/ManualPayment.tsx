@@ -1,11 +1,11 @@
 'use client';
 
 import * as React from 'react';
-import { Card, CardContent} from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/atoms/Button';
 import { Typography } from '@/components/atoms/Typography';
 import { Badge } from '@/components/ui/badge';
-import { Eye, Edit2, Trash2, Download } from 'lucide-react';
+import { Eye, Edit2, Trash2, Download, Search, ArrowDownToLine } from 'lucide-react';
 
 // Mock user data
 const mockUsers = [
@@ -151,47 +151,48 @@ export function ManualPayment() {
 
   return (
     <div className='space-y-6 p-4 sm:p-6 lg:space-y-8'>
-      {/* Header */}
-      <div className='flex items-center justify-between'>
-        <Typography variant='h4' className='font-semibold text-foreground'>
-          Orders Details
-        </Typography>
-        <Button onClick={handleExport} className='bg-purple-600 hover:bg-purple-700 text-white'>
-          <Download className='mr-2 h-4 w-4' />
-          Export
-        </Button>
+      <div className='h-[58px] relative '>
+        <div className='absolute left-4 top-4'>
+          <Search className='text-[#817979]' />
+        </div>
+        <input type="text" className='bg-[#FFFFFF0D] grad_border1 px-12 w-full focus:outline-0 h-[58px] rounded-[5px] text-xl text-white' placeholder='Search' />
       </div>
+
 
       {/* Users Table */}
       <Card className='border-border bg-card'>
         <CardContent className='p-0'>
+          <div className=' flex justify-between px-4 mb-4'>
+            <h3 className='text-xl text-white '>Manual Payments</h3>
+            <button className='flex gap-3.5 items-center'>Export <ArrowDownToLine className='h-3.5' /></button>
+          </div>
           <div className='overflow-x-auto'>
             <table className='w-full'>
               <thead className='border-b border-border'>
                 <tr className='text-left'>
-                  <th className='px-6 py-4 text-sm font-medium text-muted-foreground uppercase tracking-wider'>
+                  <th className='px-6 py-4 text-sm font-medium  uppercase tracking-wider'>
                     ID
                   </th>
-            
-                  <th className='px-6 py-4 text-sm font-medium text-muted-foreground uppercase tracking-wider'>
+
+                  <th className='px-6 py-4 text-sm font-medium  uppercase tracking-wider'>
                     NAME
                   </th>
-                  <th className='px-6 py-4 text-sm font-medium text-muted-foreground uppercase tracking-wider'>
+                  <th className='px-6 py-4 text-sm font-medium  uppercase tracking-wider'>
                     AMOUNT
                   </th>
-                  <th className='px-6 py-4 text-sm font-medium text-muted-foreground uppercase tracking-wider'>
+                  <th className='px-6 py-4 text-sm font-medium  uppercase tracking-wider'>
                     METHOD
                   </th>
-                  <th className='px-6 py-4 text-sm font-medium text-muted-foreground uppercase tracking-wider'>
+                  <th className='px-6 py-4 text-sm font-medium  uppercase tracking-wider'>
                     SCREENSHOT
                   </th>
-                  <th className='px-6 py-4 text-sm font-medium text-muted-foreground uppercase tracking-wider'>
+                  <th className='px-6 py-4 text-sm font-medium  uppercase tracking-wider'>
                     REGISTERED ON
                   </th>
-                  <th className='px-6 py-4 text-sm font-medium text-muted-foreground uppercase tracking-wider'>
+                  <th className='px-6 py-4 text-sm font-medium  uppercase tracking-wider'>
                     STATUS
                   </th>
-               
+
                 </tr>
               </thead>
               <tbody className='divide-y divide-border'>

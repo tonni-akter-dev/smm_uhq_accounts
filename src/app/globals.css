@@ -151,7 +151,9 @@
   }
 
   .gradient {
-    @apply bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent;
+    /* background: linear-gradient(354.17deg, #7129FF 3.91%, #BD00FD 72.59%); */
+
+    @apply bg-gradient-to-r from-[#7129FF] to-[#BD00FD] bg-clip-text text-transparent;
   }
 }
 
@@ -2366,3 +2368,35 @@ button {
     z-index: 0;
   }
 }
+
+
+
+
+/* dashboard  */
+
+
+.grad_border {
+  border: 1px solid transparent;
+  border-image-source: linear-gradient(113.18deg, rgba(255, 255, 255, 0.46) -5.09%, rgba(255, 255, 255, 0) 55.69%);
+  border-image-slice: 1;
+  outline: none;
+  background-image: url('/shadow-bg.png');
+  background-repeat: no-repeat;
+  width: 100%;
+  background-size: cover;
+
+}
+
+thead {
+  background-color: #1C192A;
+  color: white !important;
+}
+
+.grad_border1 {
+  border: 1px solid transparent;
+  border-image-source: linear-gradient(113.18deg, rgba(255, 255, 255, 0.46) -5.09%, rgba(255, 255, 255, 0) 55.69%);
+  border-image-slice: 1;
+  outline: none;
+}
+
+/* dashboard  */

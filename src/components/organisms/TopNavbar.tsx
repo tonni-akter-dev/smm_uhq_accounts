@@ -18,8 +18,8 @@ export function TopNavbar({ onMenuToggle, pageTitle = 'Dashboard' }: TopNavbarPr
   const { user, logout } = useAuth();
 
   return (
-    <header className='fixed top-0 right-0 left-0 z-40 border-b border-border bg-card lg:left-64'>
-      <div className='flex h-16 items-center justify-between px-4 lg:px-6'>
+    <header className='absolute top-0 right-0 left-0 z-40  lg:left-64'>
+      <div className='flex h-16 items-center justify-between px-4 lg:px-6 '>
         {/* Left Section */}
         <div className='flex items-center space-x-4'>
           {/* Mobile Menu Button */}

@@ -143,16 +143,6 @@ export function RefillRequests() {
 
   return (
     <div className='space-y-6 p-4 sm:p-6 lg:space-y-8'>
-      {/* Header */}
-      <div className='flex items-center justify-between'>
-        <Typography variant='h4' className='font-semibold text-foreground'>
-          Refill Requests
-        </Typography>
-        <Button onClick={handleExport} className='bg-purple-600 hover:bg-purple-700 text-white'>
-          <Download className='mr-2 h-4 w-4' />
-          Export
-        </Button>
-      </div>
 
       {/* Users Table */}
       {isModalOpen ? (
@@ -242,14 +232,7 @@ export function RefillRequests() {
         </CardContent>
       </Card>):<ViewDetailsPage  isOpen={isModalOpen}  onClose={handleCloseModal} />}
 
-      {/* Order Details Modal */}
-      {/* <UserDetailsModal
-        isOpen={isModalOpen}
-        onClose={handleCloseModal}
-        user={selectedUser}
-        onEdit={handleEdit}
-        onDelete={handleDelete}
-      /> */}
+     
     </div>
   );
 }

@@ -20,9 +20,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en' suppressHydrationWarning>
-      <body className={`${inter.variable} font-sans antialiased dark:bg-gradient-dark`}>
+      <body className={`${inter.variable} font-sans antialiased`}>
         <ThemeProvider defaultTheme='system' storageKey='smm-ui-theme'>
-           <AuthProvider>{children}</AuthProvider>
+          <AuthProvider>{children}</AuthProvider>
         </ThemeProvider>
       </body>
     </html>

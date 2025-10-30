@@ -34,7 +34,7 @@ export function ViewDetailsPage({
                         <div>
                             <h3 className="font-semibold text-purple-400 mb-2">Order Information</h3>
                             <div className="border border-white/10 rounded-lg overflow-hidden">
-                                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-6 divide-y divide-white/5">
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 divide-y divide-white/5">
                                     {[
                                         { label: 'Order ID', value: '#12348' },
                                         { label: 'Order Link', value: 'https://example.com/post/123' },
@@ -67,7 +67,7 @@ export function ViewDetailsPage({
 
                         {/* Upload Refill Reason */}
                         <div>
-                            <h3 className="font-semibold text-purple-400 mb-2">Upload Refill Reason</h3>
+                            <h3 className="font-semibold text-purple-400 mb-2">User Refill Reason</h3>
                             <div className="rounded-lg p-4 text-gray-300 leading-relaxed bg-purple-950/10">
                                 The user reported that the likes dropped significantly after a few days. They provided
                                 screenshots as proof of the drop and requested a refill to compensate for the lost likes.
@@ -78,7 +78,7 @@ export function ViewDetailsPage({
                         <div>
                             <h3 className="font-semibold text-purple-400 mb-2">Provider Information</h3>
                             <div className="border border-white/10 rounded-lg overflow-hidden">
-                                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-6 divide-y divide-white/5">
+                                <div className="grid grid-cols-1 md:grid-cols-2  gap-x-6 divide-y divide-white/5">
                                     {[
                                         { label: 'Provider ID', value: '#1800' },
                                         { label: 'Provider Name', value: 'Provider A' },

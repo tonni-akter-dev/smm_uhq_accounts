@@ -1,9 +1,9 @@
-import { RefillRequests } from '@/components/organisms/RefillRequests'
+import { RefillRequestTable } from '@/components/organisms/RefillRequestTable'
 import React from 'react'
 
 const RefilPage = () => {
     return (
-        <div><RefillRequests /></div>
+        <div><RefillRequestTable /></div>
     )
 }
 
