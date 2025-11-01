@@ -1,42 +1,157 @@
+/* eslint-disable @next/next/no-img-element */
 'use client';
 
 import * as React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
+import { useState, useEffect, useRef } from 'react';
 
+// Message type definition
+interface Message {
+  id: string;
+  sender: 'user' | 'admin';
+  content: string;
+  timestamp: string;
+  avatar: string;
+  name: string;
+}
 
 // Mock user data
-
-
 export function TicketSupport() {
+  // State for messages
+  const [messages, setMessages] = useState<Message[]>([
+    {
+      id: '1',
+      sender: 'user',
+      content: `I'm having trouble accessing my account. I've tried resetting my password, but I'm not receiving the reset email. Can you please help?`,
+      timestamp: '10:00 AM',
+      avatar: 'https://i.pravatar.cc/40?u=emily2',
+      name: 'Emily Carter'
+    },
+    {
+      id: '2',
+      sender: 'admin',
+      content: `Hi Emily, I'm sorry to hear you're having trouble. I've checked your account, and it seems there might be an issue with the email address on file. Could you please confirm the email you're trying to use?`,
+      timestamp: '10:05 AM',
+      avatar: 'https://i.pravatar.cc/40?u=sarah',
+      name: 'Sarah Miller'
+    },
+    {
+      id: '3',
+      sender: 'user',
+      content: `Yes, it's emily.carter@email.com. I've been using this email for years, so I'm not sure why it's not working.`,
+      timestamp: '10:10 AM',
+      avatar: 'https://i.pravatar.cc/40?u=emily2',
+      name: 'Emily Carter'
+    },
+    {
+      id: '4',
+      sender: 'admin',
+      content: `Thank you for confirming. I've updated your email address in our system. Please try resetting your password again and let me know if you still don't receive the email.`,
+      timestamp: '10:15 AM',
+      avatar: 'https://i.pravatar.cc/40?u=sarah2',
+      name: 'Sarah Miller'
+    }
+  ]);
+  
+  // State for input field
+  const [inputValue, setInputValue] = useState('');
+  // State for loading
+  const [isLoading, setIsLoading] = useState(false);
+  // Ref for messages container to auto-scroll
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+  
+  // Function to scroll to bottom of messages
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+  
+  // Scroll to bottom when messages change
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
+  
+  // Function to get current time
+  const getCurrentTime = () => {
+    const now = new Date();
+    return now.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true });
+  };
+  
+  // Function to handle sending a message
+  const handleSendMessage = () => {
+    if (inputValue.trim() === '') return;
+    
+    // Add admin message (current user)
+    const newMessage: Message = {
+      id: Date.now().toString(),
+      sender: 'admin',
+      content: inputValue,
+      timestamp: getCurrentTime(),
+      avatar: 'https://i.pravatar.cc/40?u=sarah2',
+      name: 'Sarah Miller'
+    };
+    
+    setMessages(prev => [...prev, newMessage]);
+    setInputValue('');
+    setIsLoading(true);
+    
+    // Simulate receiving a response after 2-3 seconds
+    setTimeout(() => {
+      const responses = [
+        "Thank you for your message. I'm looking into this issue for you.",
+        "I understand your concern. Let me check our system for more information.",
+        "I appreciate your patience. I'm working on a solution for you.",
+        "Thanks for the update. I'll make sure this gets resolved as soon as possible.",
+        "I see what's happening now. Let me help you with this."
+      ];
+      
+      const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+      
+      const responseMessage: Message = {
+        id: (Date.now() + 1).toString(),
+        sender: 'user',
+        content: randomResponse,
+        timestamp: getCurrentTime(),
+        avatar: 'https://i.pravatar.cc/40?u=emily2',
+        name: 'Emily Carter'
+      };
+      
+      setMessages(prev => [...prev, responseMessage]);
+      setIsLoading(false);
+    }, 2000 + Math.random() * 1000); // Random delay between 2-3 seconds
+  };
+  
+  // Function to handle Enter key press
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      handleSendMessage();
+    }
+  };
 
   return (
     <div className='space-y-6 p-4 sm:p-6 lg:space-y-8'>
-
       {/* Users Table */}
-      <Card className="border border-border bg-card text-white rounded-lg shadow-lg">
+      <Card className=" bg-card text-white rounded-lg shadow-lg">
         <CardContent className="p-6">
           <div className="w-full space-y-6">
             {/* Header */}
-            <h2 className="text-xl font-bold">Ticket Support #12345</h2>
+            <h2 className="text-xl font-bold">Ticket #12345</h2>
 
             {/* Order Information */}
             <div>
-              <h3 className="font-semibold text-purple-400 mb-2">Ticket Information</h3>
-              <div className="border border-white/10 rounded-lg overflow-hidden">
-                <div className="grid grid-cols-1  md:grid-cols-2 gap-x-6 divide-y divide-white/5">
+              <h3 className="font-semibold text-purple-400 mb-2 border-b pb-4">Ticket Information</h3>
+              <div className=" rounded-lg overflow-hidden">
+                <div className="grid grid-cols-1  md:grid-cols-2 ">
                   {[
-                    { label: 'Order ID', value: '#12348' },
-                    { label: 'Order Link', value: 'https://example.com/post/123' },
-                    { label: 'Order Status', value: 'Completed' },
-                    { label: 'Order Date', value: '2023-01-01' },
-                    { label: 'Service', value: 'Likes' },
-                    { label: 'Provider', value: 'Provider A' },
-                    { label: 'Order Cost', value: '$10' },
-                    { label: 'Refill Count', value: '2 times' },
+                    { label: 'Status', value: 'Open' },
+                    { label: 'Priority', value: 'High' },
+                    { label: 'Assigned To', value: 'Sarah Miller' },
+                    { label: 'Created At', value: '2024-01-15 10:00 AM' },
+                    { label: 'Last Updated', value: '2024-01-16 02:00 PM' },
+                    { label: 'Customer', value: 'Emily Carter' },
                   ].map((item, index) => (
                     <div
                       key={index}
-                      className="flex flex-col border-b border-white/5 px-4 py-3 last:border-0"
+                      className="flex flex-col border-b border-white/5 py-3 "
                     >
                       <span className="text-xs text-gray-400 uppercase tracking-wider">
                         {item.label}
@@ -47,10 +162,6 @@ export function TicketSupport() {
                 </div>
               </div>
             </div>
-
-
-
-
           </div>
           {/* Chat Section */}
           <div className="mt-8  from-purple-900/20 to-black/40 text-gray-200 ">
@@ -61,131 +172,103 @@ export function TicketSupport() {
                 {/* <div className="text-sm text-gray-400">Ticket #12345 • High Priority</div> */}
               </div>
 
-              {/* Message Thread */}
-              <div className="space-y-6 max-h-[400px] overflow-y-auto pr-2">
-                {/* User Message */}
-                <div className="flex items-start gap-3">
-                  {/* <img
-                    src="https://i.pravatar.cc/40?u=emily"
-                    alt="Emily Carter"
-                    className="w-8 h-8 rounded-full border border-white/10 object-cover"
-                  /> */}
-                  <div className="flex flex-col items-start">
-                    <div className="bg-purple-700/30 text-gray-100 px-4 py-3 rounded-2xl rounded-bl-none max-w-[85%] sm:max-w-[55%] md:max-w-[45%]">
-                      <p>
-                       {` I'm having trouble accessing my account. I've tried resetting my password,
-                        but I'm not receiving the reset email. Can you please help?`}
-                      </p>
+              <div className="space-y-4 max-h-[400px] overflow-y-auto pr-2">
+                {/* Render messages from state */}
+                {messages.map((message) => (
+                  <div key={message.id} className={`flex ${message.sender === 'admin' ? 'justify-end' : 'justify-start'}`}>
+                    <div className={`flex gap-3 max-w-[85%] sm:max-w-[70%] ${message.sender === 'admin' ? 'flex-row-reverse' : ''}`}>
+                      <img
+                        src={message.avatar}
+                        alt={message.name}
+                        className="w-8 h-8 rounded-full border border-white/10 object-cover flex-shrink-0"
+                      />
+                      <div className={`flex flex-col ${message.sender === 'admin' ? 'items-end' : 'items-start'}`}>
+                        <div className={`${message.sender === 'admin' ? 'bg-[#46214E]' : 'bg-[#241A3E]'} text-[#CED9E0] px-4 py-3 rounded-2xl ${message.sender === 'admin' ? 'rounded-br-none' : 'rounded-bl-none'}`}>
+                          <p className='text-[#CED9E0] text-sm'>
+                            {message.content}
+                          </p>
+                        </div>
+                        <span className="text-xs text-gray-400 mt-1">
+                          {message.name} • {message.timestamp}
+                        </span>
+                      </div>
                     </div>
-                    <span className="text-xs text-gray-400 mt-1 ml-1">Emily Carter • 10:00 AM</span>
                   </div>
-                </div>
-
-                {/* Admin Reply */}
-                <div className="flex items-start justify-end gap-3">
-                  <div className="flex flex-col items-end">
-                    <div className="bg-purple-600/40 px-4 py-3 rounded-2xl rounded-br-none text-gray-100 max-w-[85%] sm:max-w-[55%] md:max-w-[45%]">
-                      <p>
-                        {`Hi Emily, I'm sorry to hear you're having trouble. I've checked your account,
-                        and it seems there might be an issue with the email address on file.
-                        Could you please confirm the email you're trying to use?`}
-                      </p>
+                ))}
+                
+                {/* Loading indicator */}
+                {isLoading && (
+                  <div className="flex justify-start">
+                    <div className="flex gap-3 max-w-[85%] sm:max-w-[70%]">
+                      <img
+                        src="https://i.pravatar.cc/40?u=emily2"
+                        alt="Emily Carter"
+                        className="w-8 h-8 rounded-full border border-white/10 object-cover flex-shrink-0"
+                      />
+                      <div className="flex flex-col items-start">
+                        <div className="bg-[#241A3E] px-4 py-3 rounded-2xl rounded-bl-none text-[#CED9E0]">
+                          <div className="flex space-x-1">
+                            <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
+                            <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
+                            <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                    <span className="text-xs text-gray-400 mt-1 mr-1 text-right">Sarah Miller • 10:05 AM</span>
                   </div>
-                  {/* <img
-                    src="https://i.pravatar.cc/40?u=sarah"
-                    alt="Sarah Miller"
-                    className="w-8 h-8 rounded-full border border-white/10 object-cover"
-                  /> */}
-                </div>
-
-                {/* User Reply */}
-                <div className="flex items-start gap-3">
-                  {/* <img
-                    src="https://i.pravatar.cc/40?u=emily2"
-                    alt="Emily Carter"
-                    className="w-8 h-8 rounded-full border border-white/10 object-cover"
-                  /> */}
-                  <div className="flex flex-col items-start">
-                    <div className="bg-purple-700/30 text-gray-100 px-4 py-3 rounded-2xl rounded-bl-none max-w-[85%] sm:max-w-[55%] md:max-w-[45%]">
-                      <p>
-                     {`   Yes, it's emily.carter@email.com. I've been using this email for years,
-                        so I'm not sure why it's not working.`}
-                      </p>
-                    </div>
-                    <span className="text-xs text-gray-400 mt-1 ml-1">Emily Carter • 10:10 AM</span>
-                  </div>
-                </div>
-
-                {/* Admin Reply */}
-                <div className="flex items-start justify-end gap-3">
-                  <div className="flex flex-col items-end">
-                    <div className="bg-purple-600/40 px-4 py-3 rounded-2xl rounded-br-none text-gray-100 max-w-[85%] sm:max-w-[55%] md:max-w-[45%]">
-                      <p>
-                        {`Thank you for confirming. I've updated your email address in our system.
-                        Please try resetting your password again and let me know if you still
-                        don't receive the email.`}
-                      </p>
-                    </div>
-                    <span className="text-xs text-gray-400 mt-1 mr-1 text-right">Sarah Miller • 10:15 AM</span>
-                  </div>
-                  {/* <img
-                    src="https://i.pravatar.cc/40?u=sarah2"
-                    alt="Sarah Miller"
-                    className="w-8 h-8 rounded-full border border-white/10 object-cover"
-                  /> */}
-                </div>
+                )}
+                
+                {/* Ref for auto-scrolling */}
+                <div ref={messagesEndRef} />
               </div>
 
               {/* Reply Input */}
               <div className="border-t border-white/10 pt-4 space-y-4">
-                <div className="flex items-center gap-2">
-                  <input
-                    type="text"
-                    placeholder="Type your reply here..."
-                    className="w-full bg-black/30 border border-white/10 rounded-lg px-4 py-2 text-sm text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-600"
+                <div className='flex gap-3'>
+                  <img
+                    src="https://i.pravatar.cc/40?u=sarah2"
+                    alt="Sarah Miller"
+                    className="w-8 h-8 rounded-full border border-white/10 object-cover flex-shrink-0"
                   />
-                  <button className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg text-sm transition">
-                    Send
-                  </button>
+                  <div className="flex-1">
+                    <input
+                      type="text"
+                      placeholder="Type your reply here..."
+                      value={inputValue}
+                      onChange={(e) => setInputValue(e.target.value)}
+                      onKeyPress={handleKeyPress}
+                      className="w-full bg-[#1C192A] border h-12 border-white/10 rounded-lg px-4 py-2 text-sm text-[#CED9E0] placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-600"
+                    />
+                  </div>
                 </div>
-
+                
                 {/* Action Buttons */}
-                <div className="flex flex-col items-end gap-2">
-                  {/* First Row */}
+                <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3">
                   <div className="flex gap-2">
-                    <button className="bg-purple-700 hover:bg-purple-800 text-white px-4 py-2 rounded-lg text-sm transition">
-                      Close Ticket
+                    <button className="bg-[#1C192A] text-white px-4 py-2 rounded-lg text-sm transition hover:bg-[#2a2438]">
+                      Block User
                     </button>
-                    <button className="bg-purple-700 hover:bg-purple-800 text-white px-4 py-2 rounded-lg text-sm transition">
-                      Reopen Ticket
+                    <button className="bg-[#1C192A] text-white px-4 py-2 rounded-lg text-sm transition hover:bg-[#2a2438]">
+                      Change Priority Status
                     </button>
                   </div>
-
-                  {/* Second Row */}
                   <div className="flex gap-2">
-                    <button className="bg-[#1C192A] hover:bg-purple-800 text-white px-4 py-2 rounded-lg text-sm transition">
-                     Block User
+                    <button className="bg-[#1C192A] text-white px-4 py-2 rounded-lg text-sm transition hover:bg-[#2a2438]">
+                      Close Ticket
                     </button>
-                    <button className="bg-[#1C192A] hover:bg-purple-800 text-white px-4 py-2 rounded-lg text-sm transition">
-                     Change Priority Status
-                    </button>
+                    <button 
+                      onClick={handleSendMessage}
+                      className="bg-[#FD00E3] rounded-[20px] px-4 py-2 text-white text-sm transition hover:bg-[#e100cc]"
+                    >
+                      Send
+                    </button>   
                   </div>
                 </div>
               </div>
             </div>
           </div>
-
-
-
         </CardContent>
       </Card>
-
-
-
-
-
     </div>
   );
 }
