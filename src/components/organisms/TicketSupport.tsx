@@ -183,8 +183,8 @@ export function TicketSupport() {
                         className="w-8 h-8 rounded-full border border-white/10 object-cover flex-shrink-0"
                       />
                       <div className={`flex flex-col ${message.sender === 'admin' ? 'items-end' : 'items-start'}`}>
-                        <div className={`${message.sender === 'admin' ? 'bg-[#46214E]' : 'bg-[#241A3E]'} text-[#CED9E0] px-4 py-3 rounded-2xl ${message.sender === 'admin' ? 'rounded-br-none' : 'rounded-bl-none'}`}>
-                          <p className='text-[#CED9E0] text-sm'>
+                        <div className={`${message.sender === 'admin' ? 'bg-[#46214E]' : 'bg-[#241A3E]'} text-[#CED9E0]! px-4 py-3 rounded-2xl ${message.sender === 'admin' ? 'rounded-br-none' : 'rounded-bl-none'}`}>
+                          <p className='text-[#CED9E0]! text-sm'>
                             {message.content}
                           </p>
                         </div>
@@ -206,7 +206,7 @@ export function TicketSupport() {
                         className="w-8 h-8 rounded-full border border-white/10 object-cover flex-shrink-0"
                       />
                       <div className="flex flex-col items-start">
-                        <div className="bg-[#241A3E] px-4 py-3 rounded-2xl rounded-bl-none text-[#CED9E0]">
+                        <div className="bg-[#241A3E] px-4 py-3 rounded-2xl rounded-bl-none text-[#CED9E0]!">
                           <div className="flex space-x-1">
                             <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
                             <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
@@ -237,7 +237,7 @@ export function TicketSupport() {
                       value={inputValue}
                       onChange={(e) => setInputValue(e.target.value)}
                       onKeyPress={handleKeyPress}
-                      className="w-full bg-[#1C192A] border h-12 border-white/10 rounded-lg px-4 py-2 text-sm text-[#CED9E0] placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-600"
+                      className="w-full bg-[#1C192A] border h-12 border-white/10 rounded-lg px-4 py-2 text-sm text-[#CED9E0]! placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-600"
                     />
                   </div>
                 </div>

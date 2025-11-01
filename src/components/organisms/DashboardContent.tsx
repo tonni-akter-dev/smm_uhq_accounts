@@ -35,7 +35,7 @@ const metricsData = [
 
 export function DashboardContent() {
   return (
-    <div className="space-y-6 p-4 sm:p-6 lg:p-8 xl:p-10 bg-[#1C192A]">
+    <div className="space-y-6 p-4 sm:p-6 lg:p-8 xl:p-10">
       {/* Metrics Cards */}
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:gap-[60px]">
         {metricsData.map((metric, index) => {

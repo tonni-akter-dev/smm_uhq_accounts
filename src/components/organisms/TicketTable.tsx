@@ -91,22 +91,6 @@ const mockTickets = [
 ];
 
 export function TicketTable() {
-    const [isModalOpen, setIsModalOpen] = React.useState(false);
-    const [selectedTicket, setSelectedTicket] = React.useState<(typeof mockTickets)[0] | null>(null);
-
-    const handleView = (ticketId: string) => {
-        const ticket = mockTickets.find((t) => t.id === ticketId);
-        if (ticket) {
-            setSelectedTicket(ticket);
-            setIsModalOpen(true);
-        }
-    };
-
-    const handleCloseModal = () => {
-        setIsModalOpen(false);
-        setSelectedTicket(null);
-    };
-
     const getPriorityBadgeVariant = (priority: string) => {
         switch (priority) {
             case 'High':

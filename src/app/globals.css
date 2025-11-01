@@ -2399,4 +2399,10 @@ thead {
   outline: none;
 }
 
+.dash_bg {
+  background-image: url('/dashboard_bg.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 /* dashboard  */

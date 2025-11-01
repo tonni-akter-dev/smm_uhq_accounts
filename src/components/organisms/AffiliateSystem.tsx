@@ -6,7 +6,7 @@ import { Button } from '@/components/atoms/Button';
 import { Typography } from '@/components/atoms/Typography';
 import { Badge } from '@/components/ui/badge';
 import { Avatar } from '@/components/ui/avatar';
-import { Eye, Edit2, Trash2, Download } from 'lucide-react';
+import { Eye, Edit2, Trash2, Download, ArrowDownToLine, Search } from 'lucide-react';
 
 // Mock user data
 const mockUsers = [
@@ -120,8 +120,8 @@ const mockUsers = [
 export function AffiliateSystem() {
   const [isModalOpen, setIsModalOpen] = React.useState(false);
   const [selectedUser, setSelectedUser] = React.useState<(typeof mockUsers)[0] | null>(null);
- console.log(isModalOpen);
- console.log(selectedUser)
+  console.log(isModalOpen);
+  console.log(selectedUser)
   const handleView = (userId: string) => {
     const user = mockUsers.find((u) => u.id === userId);
     if (user) {
@@ -153,19 +153,19 @@ export function AffiliateSystem() {
   return (
     <div className='space-y-6 p-4 sm:p-6 lg:space-y-8'>
       {/* Header */}
-      <div className='flex items-center justify-between'>
-        <Typography variant='h4' className='font-semibold text-foreground'>
-         Affiliate System
-        </Typography>
-        <Button onClick={handleExport} className='bg-purple-600 hover:bg-purple-700 text-white'>
-          <Download className='mr-2 h-4 w-4' />
-          Export
-        </Button>
+      <div className='h-[58px] relative '>
+        <div className='absolute left-4 top-4'>
+          <Search className='text-[#817979]' />
+        </div>
+        <input type="text" className='bg-[#FFFFFF0D] grad_border1 px-12 w-full focus:outline-0 h-[58px] rounded-[5px] text-xl text-white' placeholder='Search' />
       </div>
-
       {/* Users Table */}
       <Card className='border-border bg-card'>
         <CardContent className='p-0'>
+          <div className=' flex justify-between px-4 mb-4'>
+            <h3 className='text-xl text-white '>Affiliate System</h3>
+            <button className='flex gap-3.5 items-center text-white'>Export <ArrowDownToLine className='h-3.5' /></button>
+          </div>
           <div className='overflow-x-auto'>
             <table className='w-full'>
               <thead className='border-b border-border'>
@@ -180,13 +180,16 @@ export function AffiliateSystem() {
                     NAME
                   </th>
                   <th className='px-6 py-4 text-sm font-medium text-muted-foreground uppercase tracking-wider'>
-                    SERVICES
+                    Referral Code
                   </th>
                   <th className='px-6 py-4 text-sm font-medium text-muted-foreground uppercase tracking-wider'>
-                    QUANTITY
+                    Referrals
                   </th>
                   <th className='px-6 py-4 text-sm font-medium text-muted-foreground uppercase tracking-wider'>
-                    LINKS
+                    Total Earned
+                  </th>
+                  <th className='px-6 py-4 text-sm font-medium text-muted-foreground uppercase tracking-wider'>
+                    Commission
                   </th>
                   <th className='px-6 py-4 text-sm font-medium text-muted-foreground uppercase tracking-wider'>
                     STATUS
@@ -226,6 +229,11 @@ export function AffiliateSystem() {
                     <td className='px-6 py-4 whitespace-nowrap'>
                       <Typography variant='small' className='text-muted-foreground'>
                         {user.balance}
+                      </Typography>
+                    </td>
+                    <td className='px-6 py-4 whitespace-nowrap'>
+                      <Typography variant='small' className='text-muted-foreground'>
+                        {user.totalOrders}
                       </Typography>
                     </td>
                     <td className='px-6 py-4 whitespace-nowrap'>

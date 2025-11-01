@@ -41,15 +41,12 @@ export default function DashboardLayout({
   };
 
   return (
-    <div className='min-h-screen relative bg-[#1C192A]'>
+    <div className='min-h-screen relative bg-[#1C192A] dash_bg'>
       {/* Sidebar */}
       <Sidebar
         isOpen={sidebarOpen}
         onToggle={toggleSidebar}
       />
-      <Image className='absolute right-0 top-0 size-[393px] z-10' src={top_right_shadosd} alt="" />
-      {/* <Image className='absolute left-[20%] bottom-0  z-10' src={sidebar_bottomshadow} alt="" /> */}
-
       {/* Top Navbar */}
       <TopNavbar onMenuToggle={toggleSidebar} pageTitle={getPageTitle()} />
 

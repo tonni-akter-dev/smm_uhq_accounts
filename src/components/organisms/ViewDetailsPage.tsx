@@ -109,7 +109,6 @@ export function ViewDetailsPage({
                             </p>
                         </div>
                     </div>
-
                     <div className='mt-4 flex gap-2 justify-end items-center'>
                         <button className='bg-[#FD00E3] rounded-[20px] px-4 py-2'>Approve</button>
                         <button className='bg-[#1C192A] rounded-[20px] px-4 py-2'>Reject</button>
@@ -117,11 +116,6 @@ export function ViewDetailsPage({
                     </div>
                 </CardContent>
             </Card>
-
-
-
-
-
         </div>
     );
 }

@@ -6,7 +6,7 @@ import { Button } from '@/components/atoms/Button';
 import { Typography } from '@/components/atoms/Typography';
 import { Badge } from '@/components/ui/badge';
 import { Avatar } from '@/components/ui/avatar';
-import { Eye, Edit2, Trash2, Download } from 'lucide-react';
+import { Eye, Edit2, Trash2, Search, ArrowDownToLine } from 'lucide-react';
 
 // Mock user data
 const mockUsers = [
@@ -121,7 +121,7 @@ export function ReportLogs() {
   const [isModalOpen, setIsModalOpen] = React.useState(false);
   const [selectedUser, setSelectedUser] = React.useState<(typeof mockUsers)[0] | null>(null);
   const [activeTab, setActiveTab] = React.useState('Activity Logs');
- 
+
   console.log(isModalOpen, selectedUser)
   const handleView = (userId: string) => {
     const user = mockUsers.find((u) => u.id === userId);
@@ -146,19 +146,14 @@ export function ReportLogs() {
     console.log('Export users data');
   };
 
-
-
   return (
     <div className='space-y-6 p-4 sm:p-6 lg:space-y-8'>
       {/* Header */}
-      <div className='flex items-center justify-between'>
-        <Typography variant='h4' className='font-semibold text-foreground'>
-          Report Logs
-        </Typography>
-        <Button onClick={handleExport} className='bg-purple-600 hover:bg-purple-700 text-white'>
-          <Download className='mr-2 h-4 w-4' />
-          Export
-        </Button>
+      <div className='h-[58px] relative '>
+        <div className='absolute left-4 top-4'>
+          <Search className='text-[#817979]' />
+        </div>
+        <input type="text" className='bg-[#FFFFFF0D] grad_border1 px-12 w-full focus:outline-0 h-[58px] rounded-[5px] text-xl text-white' placeholder='Search' />
       </div>
 
       {/* Tabs */}
@@ -180,11 +175,15 @@ export function ReportLogs() {
       {/* Tab Content */}
       <Card className='border-border bg-card'>
         <CardContent className='p-0'>
+          <div className=' flex justify-between px-4 mb-4'>
+            <h3 className='text-xl text-white '>Activity Logs</h3>
+            <button className='flex gap-3.5 items-center text-white'>Export <ArrowDownToLine className='h-3.5' /></button>
+          </div>
           <div className='overflow-x-auto'>
             {activeTab === 'Activity Logs' && (
               <table className='w-full'>
                 <thead className='border-b border-border'>
-                  
+
                   <tr className='text-left'>
                     <th className='px-6 py-4 text-sm font-medium text-muted-foreground uppercase tracking-wider'>
                       ID
