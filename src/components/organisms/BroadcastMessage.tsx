@@ -6,7 +6,7 @@ import { Button } from '@/components/atoms/Button';
 import { Typography } from '@/components/atoms/Typography';
 import { Badge } from '@/components/ui/badge';
 import { Avatar } from '@/components/ui/avatar';
-import { Eye, Edit2, Trash2, Download } from 'lucide-react';
+import { Eye, Edit2, Trash2, Download, Search } from 'lucide-react';
 import { AddMessageModal } from './AddMessageModal';
 
 // Mock user data
@@ -148,27 +148,16 @@ export function BroadcastMessage() {
   return (
     <div className='space-y-6 p-4 sm:p-6 lg:space-y-8'>
       {/* Header */}
-      <div className='flex items-center justify-between'>
-        <Typography variant='h4' className='font-semibold text-foreground'>
-          Broadcast Message
-        </Typography>
-        <Button onClick={handleExport} className='bg-purple-600 hover:bg-purple-700 text-white'>
-          <Download className='mr-2 h-4 w-4' />
-          Export
-        </Button>
-      </div>
-      <div className='flex items-center justify-between mb-4'>
-
-        <div className='flex items-center space-x-2'>
-        
-          <Button className='w-full px-4 py-2 bg-gray-900/60 border border-purple-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500' onClick={() => handleView()}>
-            + Add New Message
-          </Button>
-          <Button onClick={handleExport} className='bg-purple-600 hover:bg-purple-700 text-white'>
-            <Download className='mr-2 h-4 w-4' />
-            Export
-          </Button>
+      <div className='h-[58px] relative '>
+        <div className='absolute left-4 top-4'>
+          <Search className='text-[#817979]' />
         </div>
+        <input type="text" className='bg-[#FFFFFF0D] grad_border1 px-12 w-full focus:outline-0 h-[58px] rounded-[5px] text-xl text-white' placeholder='Search' />
+      </div>
+      <div className='flex  justify-end space-x-2'>
+        <Button className='w-fir px-4 py-2 hover:bg-transparent  bg-gray-900/60 border border-purple-600 rounded-full text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500' onClick={() => handleView()}>
+          + Add New Message
+        </Button>
       </div>
       {/* Users Table */}
       <Card className='border-border bg-card'>

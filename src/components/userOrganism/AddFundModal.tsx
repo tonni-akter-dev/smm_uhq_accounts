@@ -33,7 +33,7 @@ export function AddFundModal({ isOpen, onClose, onSave }: AddFundModalProps) {
     <>
       {/* Backdrop */}
       <div
-        className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm"
+        className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm mb-0"
         onClick={onClose}
       />
 

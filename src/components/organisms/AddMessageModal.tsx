@@ -3,6 +3,7 @@ import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Button } from '@/components/atoms/Button';
 import { Typography } from '@/components/atoms/Typography';
 import { X } from 'lucide-react';
+import { Input } from '../ui/input';
 
 interface AddMessageModalProps {
   isOpen: boolean;
@@ -35,14 +36,14 @@ export function AddMessageModal({ isOpen, onClose, onSave }: AddMessageModalProp
     <>
       {/* Backdrop */}
       <div
-        className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm"
+        className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm mb-0"
         onClick={onClose}
       />
 
       {/* Modal */}
-      <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-        <Card
-          className="w-full max-w-md sm:max-w-lg md:max-w-2xl lg:max-w-3xl xl:max-w-4xl bg-gradient-to-b from-purple-950/80 to-black/80 border border-white/10 text-gray-200 rounded-xl shadow-2xl"
+      <div className="fixed inset-0 z-50 flex items-center justify-center p-4 ">
+        <div
+          className="py-6 w-full max-w-md sm:max-w-lg md:max-w-2xl lg:max-w-3xl xl:max-w-4xl bg-[#251A41] border border-white/10 text-gray-200 rounded-xl shadow-2xl"
         >
           <CardHeader className="relative pb-2">
             <Typography variant="h5" className="text-purple-300 font-semibold">
@@ -59,15 +60,15 @@ export function AddMessageModal({ isOpen, onClose, onSave }: AddMessageModalProp
           </CardHeader>
 
           <CardContent>
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-6 pt-6">
               {/* Title */}
               <div className="flex flex-col space-y-2">
                 <label className="text-sm font-medium text-gray-400">Title</label>
-                <input
+                <Input
                   type="text"
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
-                  className="bg-black/30 border border-white/10 rounded-md px-3 py-2 text-gray-100 focus:outline-none focus:ring-2 focus:ring-purple-700"
+                  className="border border-white/10 rounded-md px-3 py-2 text-[#CED9E0]! focus:outline-none focus:ring-2 focus:ring-purple-700"
                   placeholder="Enter title"
                 />
               </div>
@@ -75,11 +76,11 @@ export function AddMessageModal({ isOpen, onClose, onSave }: AddMessageModalProp
               {/* Instagram */}
               <div className="flex flex-col space-y-2">
                 <label className="text-sm font-medium text-gray-400">Instagram</label>
-                <input
+                <Input
                   type="text"
                   value={instagram}
                   onChange={(e) => setInstagram(e.target.value)}
-                  className="bg-black/30 border border-white/10 rounded-md px-3 py-2 text-gray-100 focus:outline-none focus:ring-2 focus:ring-purple-700"
+                  className="border border-white/10 rounded-md px-3 py-2 text-[#CED9E0]! focus:outline-none focus:ring-2 focus:ring-purple-700"
                   placeholder="Enter Instagram details"
                 />
               </div>
@@ -92,7 +93,7 @@ export function AddMessageModal({ isOpen, onClose, onSave }: AddMessageModalProp
                   onChange={(e) => setMessage(e.target.value)}
                   placeholder="Enter message..."
                   rows={3}
-                  className="w-full bg-black/30 border border-white/10 rounded-md px-3 py-2 text-sm text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-700"
+                  className="w-full border bg-[#1C192A] border-white/10 rounded-md px-3 py-2 text-sm text-[#CED9E0]! placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-700"
                 />
               </div>
 
@@ -102,7 +103,7 @@ export function AddMessageModal({ isOpen, onClose, onSave }: AddMessageModalProp
                 <select
                   value={targetAudience}
                   onChange={(e) => setTargetAudience(e.target.value)}
-                  className="bg-black/30 border border-white/10 rounded-md px-3 py-2 text-gray-100 focus:outline-none focus:ring-2 focus:ring-purple-700"
+                  className="border border-white/10 bg-[#1C192A] h-12 rounded-md px-3 py-2 text-[#CED9E0] focus:outline-none focus:ring-2 focus:ring-purple-700"
                 >
                   <option value="All Users / Custom Roles / Select Users">All Users / Custom Roles / Select Users</option>
                   <option value="All Users">All Users</option>
@@ -114,11 +115,11 @@ export function AddMessageModal({ isOpen, onClose, onSave }: AddMessageModalProp
               {/* Username/Emails */}
               <div className="flex flex-col space-y-2">
                 <label className="text-sm font-medium text-gray-400">Username/Emails</label>
-                <input
+                <Input
                   type="text"
                   value={usernamesEmails}
                   onChange={(e) => setUsernamesEmails(e.target.value)}
-                  className="bg-black/30 border border-white/10 rounded-md px-3 py-2 text-gray-100 focus:outline-none focus:ring-2 focus:ring-purple-700"
+                  className="border border-white/10 rounded-md px-3 py-2 text-[#CED9E0]! focus:outline-none focus:ring-2 focus:ring-purple-700"
                   placeholder="Enter usernames/emails"
                 />
               </div>
@@ -141,7 +142,7 @@ export function AddMessageModal({ isOpen, onClose, onSave }: AddMessageModalProp
               </div>
             </form>
           </CardContent>
-        </Card>
+        </div>
       </div>
     </>
   );

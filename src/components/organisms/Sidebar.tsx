@@ -25,6 +25,7 @@ import {
   X, Ticket
 } from 'lucide-react';
 import { Button } from '@/components/atoms/Button';
+
 const navigationItems = [
   { icon: LayoutDashboard, label: 'Dashboard', href: '/admin/dashboard' },
   { icon: Users, label: 'Manage Users', href: '/admin/dashboard/manage-users' },
@@ -53,28 +54,29 @@ export function Sidebar({ isOpen, onToggle }: SidebarProps) {
   return (
     <>
       {/* Mobile Overlay */}
-      {isOpen && <div className="fixed inset-0 z-40 bg-b[#1C192A] lg:hidden" onClick={onToggle} />}
+      {isOpen && <div className="fixed inset-0 z-40 bg-black/50 lg:hidden" onClick={onToggle} />}
 
       {/* Sidebar */}
       <div
         className={cn(
-          'sidebar-transition fixed top-0 left-0 z-50 h-full w-64 bg-card  dark:bg-[#1C192A] lg:translate-x-0',
+          'sidebar-transition fixed top-0 left-0 z-50 h-full w-64 bg-white dark:bg-[#1C192A] border-r border-gray-200 dark:border-purple-700/30 lg:translate-x-0',
           isOpen ? 'translate-x-0' : '-translate-x-full'
         )}
       >
         {/* Header */}
-        <div className="flex items-center justify-between dark:border-purple-700 p-6 mt-6">
+        <div className="flex items-center justify-between p-6 mt-6 border-b border-gray-100 dark:border-purple-700/30">
           <div className="flex items-center space-x-3">
-
             <div>
-              <h3 className='text-[32px] font-bold'><span className='gradient'>UHQ</span> SMM</h3>
+              <h3 className='text-[32px] font-bold'>
+                <span className='gradient dark:gradient'>UHQ</span> SMM
+              </h3>
             </div>
           </div>
           <Button
             variant="ghost"
             size="icon"
             onClick={onToggle}
-            className="text-foreground hover:bg-accent lg:hidden"
+            className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-800 lg:hidden"
           >
             <X className="h-5 w-5" />
           </Button>
@@ -88,7 +90,7 @@ export function Sidebar({ isOpen, onToggle }: SidebarProps) {
             overflow-y-auto 
             py-4 
             scrollbar-thin 
-            scrollbar-thumb-purple-700/60 
+            scrollbar-thumb-purple-700/60 dark:scrollbar-thumb-purple-700/60 
             scrollbar-track-transparent 
             max-h-screen 
             sm:max-h-[calc(100vh-4rem)]
@@ -98,7 +100,7 @@ export function Sidebar({ isOpen, onToggle }: SidebarProps) {
           <div className="mb-5 px-7">
             <Typography
               variant="small"
-              className="font-semibold tracking-wider text-[#54617A] uppercase"
+              className="font-semibold tracking-wider text-gray-500 dark:text-[#54617A] uppercase"
             >
               MAIN
             </Typography>
@@ -117,16 +119,21 @@ export function Sidebar({ isOpen, onToggle }: SidebarProps) {
                   className={cn(
                     'flex w-full group text-sm items-center space-x-3 rounded-lg px-4 py-3 text-left transition-all duration-200 hover:scale-[1.02]',
                     isActive
-                      ? 'text-[#BD00FD]'
-                      : 'text-[#CED9E0] hover:bg-accent/40 hover:text-[#BD00FD]'
+                      ? 'bg-purple-50 dark:bg-purple-900/20 text-purple-600 dark:text-[#BD00FD] border-r-2 border-purple-600 dark:border-[#BD00FD]'
+                      : 'text-gray-700 dark:text-[#CED9E0] hover:bg-gray-100 dark:hover:bg-accent/40 hover:text-purple-600 dark:hover:text-[#BD00FD]'
                   )}
                 >
-                  <Icon className="h-5 w-5 flex-shrink-0" />
-                  <Typography variant="small" className={cn(
-                    '',
+                  <Icon className={cn(
+                    'h-5 w-5 flex-shrink-0',
                     isActive
-                      ? 'text-[#BD00FD]'
-                      : 'text-[#CED9E0] group-hover:text-[#BD00FD]'
+                      ? 'text-purple-600 dark:text-[#BD00FD]'
+                      : 'text-gray-500 dark:text-[#CED9E0] group-hover:text-purple-600 dark:group-hover:text-[#BD00FD]'
+                  )} />
+                  <Typography variant="small" className={cn(
+                    'font-medium',
+                    isActive
+                      ? 'text-purple-600 dark:text-[#BD00FD]'
+                      : 'text-gray-700 dark:text-[#CED9E0] group-hover:text-purple-600 dark:group-hover:text-[#BD00FD]'
                   )}>
                     {item.label}
                   </Typography>

@@ -1,15 +1,13 @@
 'use client';
 
 import * as React from 'react';
-import axios from 'axios';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/atoms/Button';
-import { Typography } from '@/components/atoms/Typography';
 import { Badge } from '@/components/ui/badge';
-import { Edit2, Trash2, Download } from 'lucide-react';
+import { Edit2, Trash2, Search } from 'lucide-react';
 import { AddProviderModal } from './AddProviderModal';
 
-// ✅ Define a proper interface for Provider
+// Define a proper interface for Provider
 interface Provider {
   _id: string;
   name: string;
@@ -20,109 +18,96 @@ interface Provider {
   syncservices?: string;
 }
 
+// Mock data for providers
+const mockProviders: Provider[] = [
+  {
+    _id: 'prov_001',
+    name: 'OpenAI',
+    apiurl: 'https://api.openai.com/v1',
+    apikey: 'sk-***************************',
+    balance: 125.50,
+    status: 'Active',
+    syncservices: 'gpt-3.5-turbo,gpt-4'
+  },
+  {
+    _id: 'prov_002',
+    name: 'Anthropic',
+    apiurl: 'https://api.anthropic.com/v1',
+    apikey: 'sk-ant-***************************',
+    balance: 87.25,
+    status: 'Active',
+    syncservices: 'claude-3-opus,claude-3-sonnet'
+  },
+  {
+    _id: 'prov_003',
+    name: 'Google AI',
+    apiurl: 'https://generativelanguage.googleapis.com/v1',
+    apikey: 'AIza***************************',
+    balance: 0.00,
+    status: 'Inactive',
+    syncservices: 'gemini-pro,gemini-pro-vision'
+  },
+  {
+    _id: 'prov_004',
+    name: 'Cohere',
+    apiurl: 'https://api.cohere.ai/v1',
+    apikey: '***************************',
+    balance: 42.75,
+    status: 'Active',
+    syncservices: 'command,command-light'
+  }
+];
+
 export function Providers() {
   const [isModalOpen, setIsModalOpen] = React.useState(false);
-  const [providers, setProviders] = React.useState<Provider[]>([]);
-  const [loading, setLoading] = React.useState<boolean>(true);
-  const [error, setError] = React.useState<string | null>(null);
-
-  // ✅ Fetch providers from API
-  const fetchProviders = async (): Promise<void> => {
-    try {
-      setLoading(true);
-      setError(null);
-
-      const token = localStorage.getItem('token');
-      const res = await axios.get<{ success: boolean; providers: Provider[] }>(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/admin/getProviders`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-
-      if (res.data?.success) {
-        setProviders(res.data.providers || []);
-      } else {
-        setError('Failed to load providers.');
-      }
-    } catch (err: unknown) {
-      if (axios.isAxiosError(err)) {
-        console.error('Axios error:', err.response?.data || err.message);
-        alert('❌ ' + (err.response?.data?.error || 'Server error'));
-      } else if (err instanceof Error) {
-        console.error('General error:', err.message);
-        alert('❌ ' + err.message);
-      } else {
-        console.error('Unexpected error:', err);
-        alert('❌ Something went wrong while fetching providers.');
-      }
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  React.useEffect(() => {
-    fetchProviders();
-  }, []);
+  const [providers, setProviders] = React.useState<Provider[]>(mockProviders);
 
   const handleEdit = (id: string) => {
     console.log('Edit provider:', id);
+    // In a real implementation, you would open an edit modal or navigate to an edit page
   };
 
-  const handleDelete = async (id: string): Promise<void> => {
+  const handleDelete = (id: string) => {
     if (!window.confirm('Are you sure you want to delete this provider?')) return;
 
-    try {
-      const token = localStorage.getItem('token');
-      await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/api/admin/provider/${id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      alert('✅ Provider deleted successfully!');
-      fetchProviders(); // refresh after delete
-    } catch (err: unknown) {
-      if (axios.isAxiosError(err)) {
-        alert('❌ ' + (err.response?.data?.error || 'Server error'));
-      } else if (err instanceof Error) {
-        alert('❌ ' + err.message);
-      } else {
-        alert('❌ Failed to delete provider.');
-      }
-    }
+    // Filter out the provider with the matching ID
+    const updatedProviders = providers.filter(provider => provider._id !== id);
+    setProviders(updatedProviders);
+    alert('✅ Provider deleted successfully!');
   };
 
   const handleExport = () => {
-    console.log('Export providers data');
+    // Create a JSON representation of the providers data
+    const dataStr = JSON.stringify(providers, null, 2);
+    const dataUri = 'data:application/json;charset=utf-8,' + encodeURIComponent(dataStr);
+
+    // Create a temporary link element and trigger download
+    const exportFileDefaultName = 'providers.json';
+    const linkElement = document.createElement('a');
+    linkElement.setAttribute('href', dataUri);
+    linkElement.setAttribute('download', exportFileDefaultName);
+    linkElement.click();
   };
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
-    fetchProviders(); // refresh after modal close
+    // In a real implementation, you would refresh the data here
   };
 
   return (
     <div className="space-y-6 p-4 sm:p-6 lg:space-y-8">
       {/* Header */}
-      <div className="flex items-center justify-between">
-        <Typography variant="h4" className="font-semibold text-foreground">
-          Providers
-        </Typography>
-        <Button
-          onClick={handleExport}
-          className="bg-purple-600 hover:bg-purple-700 text-white"
-        >
-          <Download className="mr-2 h-4 w-4" />
-          Export
-        </Button>
-      </div>
 
+      <div className='h-[58px] relative '>
+        <div className='absolute left-4 top-4'>
+          <Search className='text-[#817979]' />
+        </div>
+        <input type="text" className='bg-[#FFFFFF0D] grad_border1 px-12 w-full focus:outline-0 h-[58px] rounded-[5px] text-xl text-white' placeholder='Search' />
+      </div>
       {/* Add Provider Button */}
-      <div className="flex items-center justify-between mb-4">
+      <div className="flex items-center justify-end mb-4">
         <Button
-          className="w-full sm:w-auto px-4 py-2 bg-gray-900/60 border border-purple-600 rounded-lg text-white"
+          className="w-full sm:w-auto px-4 py-2 hover:bg-transparent! bg-gray-900/60 border border-purple-600 rounded-full text-white"
           onClick={() => setIsModalOpen(true)}
         >
           + Add Provider
@@ -133,11 +118,7 @@ export function Providers() {
       <Card className="border-border bg-card">
         <CardContent className="p-0">
           <div className="overflow-x-auto">
-            {loading ? (
-              <div className="p-6 text-center text-gray-500">Loading providers...</div>
-            ) : error ? (
-              <div className="p-6 text-center text-red-500">{error}</div>
-            ) : providers.length === 0 ? (
+            {providers.length === 0 ? (
               <div className="p-6 text-center text-gray-500">No providers found</div>
             ) : (
               <table className="w-full">

@@ -101,16 +101,15 @@ export function AddProviderModal({ isOpen, onClose, onSave }: AddProviderModalPr
   return (
     <>
       {/* Backdrop */}
-      <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm" onClick={onClose} />
-
+      <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm mb-0" onClick={onClose} />
       {/* Modal */}
       <div className="fixed inset-0 z-50 flex items-center justify-center p-4 overflow-y-auto">
-        <Card
+        <div
           className="
             w-full 
             max-w-5xl 
-            bg-gradient-to-b from-purple-950/80 to-black/80 
-            border border-white/10 
+           bg-[#251A41]
+            border border-white/20  
             text-gray-200 
             rounded-2xl 
             shadow-2xl 
@@ -134,7 +133,7 @@ export function AddProviderModal({ isOpen, onClose, onSave }: AddProviderModalPr
           <CardContent>
             <form onSubmit={handleSubmit} className="space-y-8">
               {/* Grid layout */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 gap-6">
                 {/* Provider Name */}
                 <div className="flex flex-col space-y-2">
                   <label className="text-sm font-medium text-gray-400">Provider Name</label>
@@ -144,7 +143,7 @@ export function AddProviderModal({ isOpen, onClose, onSave }: AddProviderModalPr
                     onChange={(e) => setProviderName(e.target.value)}
                     placeholder="Enter provider name"
                     required
-                    className="bg-black/30 border border-white/10 text-gray-100 placeholder-gray-500"
+                    className=" border border-white/20  text-gray-100 placeholder-gray-500"
                   />
                 </div>
 
@@ -157,7 +156,7 @@ export function AddProviderModal({ isOpen, onClose, onSave }: AddProviderModalPr
                     onChange={(e) => setApiUrl(e.target.value)}
                     placeholder="https://api.provider.com"
                     required
-                    className="bg-black/30 border border-white/10 text-gray-100 placeholder-gray-500"
+                    className=" border border-white/20  text-gray-100 placeholder-gray-500"
                   />
                 </div>
 
@@ -170,7 +169,7 @@ export function AddProviderModal({ isOpen, onClose, onSave }: AddProviderModalPr
                     onChange={(e) => setApiKey(e.target.value)}
                     placeholder="Enter API key"
                     required
-                    className="bg-black/30 border border-white/10 text-gray-100 placeholder-gray-500"
+                    className=" border border-white/20  text-gray-100 placeholder-gray-500"
                   />
                 </div>
 
@@ -185,7 +184,7 @@ export function AddProviderModal({ isOpen, onClose, onSave }: AddProviderModalPr
                     min="0"
                     step="0.01"
                     required
-                    className="bg-black/30 border border-white/10 text-gray-100 placeholder-gray-500"
+                    className=" border border-white/20  text-gray-100 placeholder-gray-500"
                   />
                 </div>
 
@@ -195,7 +194,7 @@ export function AddProviderModal({ isOpen, onClose, onSave }: AddProviderModalPr
                   <select
                     value={status}
                     onChange={(e) => setStatus(e.target.value)}
-                    className="w-full bg-black/30 border border-white/10 rounded-md px-3 py-2 text-gray-100 focus:outline-none focus:ring-2 focus:ring-purple-700"
+                    className="border border-white/10 bg-[#1C192A] h-12 rounded-md px-3 py-2 text-[#CED9E0] focus:outline-none focus:ring-2 focus:ring-purple-700"
                   >
                     <option value="Default">Default</option>
                     <option value="Active">Active</option>
@@ -211,7 +210,7 @@ export function AddProviderModal({ isOpen, onClose, onSave }: AddProviderModalPr
                   <select
                     value={syncServices}
                     onChange={(e) => setSyncServices(e.target.value)}
-                    className="w-full bg-black/30 border border-white/10 rounded-md px-3 py-2 text-gray-100 focus:outline-none focus:ring-2 focus:ring-purple-700"
+                    className="border border-white/10 bg-[#1C192A] h-12 rounded-md px-3 py-2 text-[#CED9E0] focus:outline-none focus:ring-2 focus:ring-purple-700"
                   >
                     <option value="Yes">Yes</option>
                     <option value="No">No</option>
@@ -238,7 +237,7 @@ export function AddProviderModal({ isOpen, onClose, onSave }: AddProviderModalPr
               </div>
             </form>
           </CardContent>
-        </Card>
+        </div>
       </div>
     </>
   );

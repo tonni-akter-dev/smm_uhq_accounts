@@ -6,6 +6,7 @@ import { Button } from '@/components/atoms/Button';
 import { Typography } from '@/components/atoms/Typography';
 import { X } from 'lucide-react';
 import axios from 'axios';
+import { Input } from '../ui/input';
 
 interface AddCategoryModalProps {
   isOpen: boolean;
@@ -77,11 +78,11 @@ export function AddCategoryModal({ isOpen, onClose, onSave }: AddCategoryModalPr
   return (
     <>
       {/* Backdrop */}
-      <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm" onClick={onClose} />
+      <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm mb-0" onClick={onClose} />
 
       {/* Modal */}
-      <div className="fixed inset-0 z-50 flex items-center justify-center p-4 overflow-auto">
-        <Card className="w-full max-w-md sm:max-w-lg md:max-w-xl lg:max-w-2xl bg-gradient-to-b from-purple-950/80 to-black/80 border border-white/10 text-gray-200 rounded-xl shadow-2xl">
+      <div className="fixed inset-0  z-50 flex items-center justify-center p-4 overflow-auto">
+        <div className="w-full max-w-md sm:max-w-lg md:max-w-xl lg:max-w-2xl  bg-[#251A41] border border-white/10 text-gray-200 rounded-xl shadow-2xl py-6">
           <CardHeader className="relative pb-2">
             <Typography variant="h5" className="text-purple-300 font-semibold">
               Add New Category
@@ -97,7 +98,7 @@ export function AddCategoryModal({ isOpen, onClose, onSave }: AddCategoryModalPr
           </CardHeader>
 
           <CardContent>
-            <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6 pt-6">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {/* Category Name */}
                 <div className="flex flex-col space-y-2">
@@ -105,7 +106,7 @@ export function AddCategoryModal({ isOpen, onClose, onSave }: AddCategoryModalPr
                   <select
                     value={categoryName}
                     onChange={(e) => setCategoryName(e.target.value)}
-                    className="bg-black/30 border border-white/10 rounded-md px-3 py-2 text-gray-100 focus:outline-none focus:ring-2 focus:ring-purple-700"
+                    className="border border-white/10 bg-[#1C192A] h-12 rounded-md px-3 py-2 text-[#CED9E0] focus:outline-none focus:ring-2 focus:ring-purple-700"
                     required
                   >
                     <option value="">Select Category</option>
@@ -122,7 +123,7 @@ export function AddCategoryModal({ isOpen, onClose, onSave }: AddCategoryModalPr
                   <select
                     value={status}
                     onChange={(e) => setStatus(e.target.value)}
-                    className="bg-black/30 border border-white/10 rounded-md px-3 py-2 text-gray-100 focus:outline-none focus:ring-2 focus:ring-purple-700"
+                    className="border border-white/10 bg-[#1C192A] h-12 rounded-md px-3 py-2 text-[#CED9E0] focus:outline-none focus:ring-2 focus:ring-purple-700"
                   >
                     <option value="active">Active</option>
                     <option value="inactive">Inactive</option>
@@ -134,8 +135,8 @@ export function AddCategoryModal({ isOpen, onClose, onSave }: AddCategoryModalPr
                   <label className="text-sm font-medium text-gray-400">
                     Upload Icon (JPEG, JPG, PNG)
                   </label>
-                  <div className="flex flex-col items-center justify-center border border-dashed border-white/20 rounded-lg p-6 bg-black/20">
-                    <input
+                  <div className="flex flex-col items-center justify-center border border-dashed bg-[#1C192A] border-white/20 rounded-lg p-6">
+                    <Input
                       type="file"
                       accept="image/*"
                       onChange={(e) => setIcon(e.target.files?.[0] || null)}
@@ -162,7 +163,7 @@ export function AddCategoryModal({ isOpen, onClose, onSave }: AddCategoryModalPr
                     onChange={(e) => setDescription(e.target.value)}
                     placeholder="Instagram services like followers..."
                     rows={3}
-                    className="w-full bg-black/30 border border-white/10 rounded-md px-3 py-2 text-sm text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-700"
+                    className="w-full bg-[#1C192A]  border border-white/10 rounded-md px-3 py-2 text-sm text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-700"
                   />
                 </div>
               </div>
@@ -179,7 +180,7 @@ export function AddCategoryModal({ isOpen, onClose, onSave }: AddCategoryModalPr
               </div>
             </form>
           </CardContent>
-        </Card>
+        </div>
       </div>
     </>
   );
