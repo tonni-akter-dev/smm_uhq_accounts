@@ -93,44 +93,40 @@ export function AddServiceModal({ isOpen, onClose, onSave }: AddServiceModalProp
 
       {/* Modal */}
       <div className="fixed inset-0 z-50 flex items-center justify-center p-4 overflow-auto">
-        <div className="py-6 w-full max-w-2xl sm:max-w-lg md:max-w-xl lg:max-w-2xl  bg-[#251A41] border border-white/20  text-gray-200 rounded-xl shadow-2xl">
-          <CardHeader className="relative pb-5">
-            <Typography variant="h5" className="text-purple-300 font-semibold">
+        <div className="py-6 w-full max-w-2xl sm:max-w-lg md:max-w-xl lg:max-w-2xl bg-white dark:bg-[#251A41] border border-gray-200 dark:border-white/20 text-gray-800 dark:text-gray-200 rounded-xl shadow-2xl">
+          <div className="relative pb-2 px-6 mb-6">
+            <p className="text-black! dark:text-white! font-semibold">
               Add New Service
-            </Typography>
-            <Button
-              variant="ghost"
-              size="icon"
+            </p>
+            <button
               onClick={onClose}
-              className="absolute top-0 right-0 text-gray-400 hover:text-white"
-            >
+              className="absolute top-0 right-6 text-gray-500 dark:text-white hover:text-gray-700 dark:hover:text-gray-200">
               <X className="h-5 w-5" />
-            </Button>
-          </CardHeader>
-
+            </button>
+          </div>
           <CardContent>
             <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
               {/* Form Fields Grid */}
               <div className="grid grid-cols-1 gap-4">
                 {/* Service Name */}
                 <div className="flex flex-col space-y-2">
-                  <label className="text-sm font-medium text-gray-400">Service Name</label>
-                   <Input
+                  <label className="text-sm font-medium text-gray-700! dark:text-white!">Service Name</label>
+                  <Input
                     type="text"
                     value={serviceName}
                     onChange={(e) => setServiceName(e.target.value)}
                     placeholder="Service Name"
-                    className="w-full  border border-white/20  rounded-md px-3 py-2 text-sm  text-[#CED9E0]! placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-700"
+                    className="w-full border border-gray-300 dark:border-white/20 rounded-md px-3 py-2 text-sm text-gray-800 dark:text-[#CED9E0] placeholder-gray-500 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 dark:focus:ring-purple-700"
                   />
                 </div>
 
                 {/* Category */}
                 <div className="flex flex-col space-y-2">
-                  <label className="text-sm font-medium text-gray-400">Category</label>
+                  <label className="text-sm font-medium text-gray-700! dark:text-white!">Category</label>
                   <select
                     value={category}
                     onChange={(e) => setCategory(e.target.value)}
-                  className="border border-white/10 bg-[#1C192A] h-12 rounded-md px-3 py-2 text-[#CED9E0] focus:outline-none focus:ring-2 focus:ring-purple-700"
+                    className="border border-gray-300 dark:border-white/10 bg-white dark:bg-[#191918] h-12 rounded-md px-3 py-2 text-gray-800 dark:text-[#CED9E0] focus:outline-none focus:ring-2 focus:ring-purple-500 dark:focus:ring-purple-700"
                     disabled={categoriesLoading}
                   >
                     <option value="">{categoriesLoading ? 'Loading...' : 'Select Category'}</option>
@@ -144,11 +140,11 @@ export function AddServiceModal({ isOpen, onClose, onSave }: AddServiceModalProp
 
                 {/* Type */}
                 <div className="flex flex-col space-y-2">
-                  <label className="text-sm font-medium text-gray-400">Type</label>
+                  <label className="text-sm font-medium text-gray-700! dark:text-white!">Type</label>
                   <select
                     value={type}
                     onChange={(e) => setType(e.target.value)}
-                     className="border border-white/10 bg-[#1C192A] h-12 rounded-md px-3 py-2 text-[#CED9E0] focus:outline-none focus:ring-2 focus:ring-purple-700"
+                    className="border border-gray-300 dark:border-white/10 bg-white dark:bg-[#191918] h-12 rounded-md px-3 py-2 text-gray-800 dark:text-[#CED9E0] focus:outline-none focus:ring-2 focus:ring-purple-500 dark:focus:ring-purple-700"
                   >
                     <option value="digital">Digital</option>
                     <option value="manual">Manual</option>
@@ -158,11 +154,11 @@ export function AddServiceModal({ isOpen, onClose, onSave }: AddServiceModalProp
 
                 {/* Status */}
                 <div className="flex flex-col space-y-2">
-                  <label className="text-sm font-medium text-gray-400">Status</label>
+                  <label className="text-sm font-medium text-gray-700! dark:text-white!">Status</label>
                   <select
                     value={status}
                     onChange={(e) => setStatus(e.target.value)}
-                   className="border border-white/10 bg-[#1C192A] h-12 rounded-md px-3 py-2 text-[#CED9E0] focus:outline-none focus:ring-2 focus:ring-purple-700"
+                    className="border border-gray-300 dark:border-white/10 bg-white dark:bg-[#191918] h-12 rounded-md px-3 py-2 text-gray-800 dark:text-[#CED9E0] focus:outline-none focus:ring-2 focus:ring-purple-500 dark:focus:ring-purple-700"
                   >
                     <option value="Active">Active</option>
                     <option value="Inactive">Inactive</option>
@@ -171,37 +167,37 @@ export function AddServiceModal({ isOpen, onClose, onSave }: AddServiceModalProp
 
                 {/* Amount */}
                 <div className="flex flex-col space-y-2">
-                  <label className="text-sm font-medium text-gray-400">Amount</label>
+                  <label className="text-sm font-medium text-gray-700! dark:text-white!">Amount</label>
                   <Input
                     type="text"
                     value={amount}
                     onChange={(e) => setAmount(e.target.value)}
                     placeholder="Enter amount"
-                    className="w-full h-12 border border-white/20  rounded-md px-3 py-2 text-sm  text-[#CED9E0]! placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-700"
+                    className="w-full h-12 border border-gray-300 dark:border-white/20 rounded-md px-3 py-2 text-sm text-gray-800 dark:text-[#CED9E0] placeholder-gray-500 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 dark:focus:ring-purple-700"
                   />
                 </div>
 
                 {/* Min Quantity */}
                 <div className="flex flex-col space-y-2">
-                  <label className="text-sm font-medium text-gray-400">Min. Quantity</label>
+                  <label className="text-sm font-medium text-gray-700! dark:text-white!">Min. Quantity</label>
                   <Input
                     type="text"
                     value={minQuantity}
                     onChange={(e) => setMinQuantity(e.target.value)}
                     placeholder="Enter min quantity"
-                    className="w-full h-12 border border-white/20  rounded-md px-3 py-2 text-sm  text-[#CED9E0]! placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-700"
+                    className="w-full h-12 border border-gray-300 dark:border-white/20 rounded-md px-3 py-2 text-sm text-gray-800 dark:text-[#CED9E0] placeholder-gray-500 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 dark:focus:ring-purple-700"
                   />
                 </div>
 
                 {/* Max Quantity */}
                 <div className="flex flex-col space-y-2">
-                  <label className="text-sm font-medium text-gray-400">Max. Quantity</label>
+                  <label className="text-sm font-medium text-gray-700! dark:text-white!">Max. Quantity</label>
                   <Input
                     type="text"
                     value={maxQuantity}
                     onChange={(e) => setMaxQuantity(e.target.value)}
                     placeholder="Enter max quantity"
-                    className="w-full h-12 border border-white/20  rounded-md px-3 py-2 text-sm  text-[#CED9E0]! placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-700"
+                    className="w-full h-12 border border-gray-300 dark:border-white/20 rounded-md px-3 py-2 text-sm text-gray-800 dark:text-[#CED9E0] placeholder-gray-500 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 dark:focus:ring-purple-700"
                   />
                 </div>
               </div>
@@ -211,7 +207,7 @@ export function AddServiceModal({ isOpen, onClose, onSave }: AddServiceModalProp
                 <Button
                   type="submit"
                   disabled={loading}
-                  className="bg-purple-700 hover:bg-purple-800 text-white rounded-md px-6 py-2 font-medium transition"
+                  className="bg-purple-600 hover:bg-purple-700 dark:bg-purple-700 dark:hover:bg-purple-800 text-white rounded-md px-6 py-2 font-medium transition"
                 >
                   {loading ? 'Saving...' : 'Save'}
                 </Button>

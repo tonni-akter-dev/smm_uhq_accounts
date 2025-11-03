@@ -240,16 +240,22 @@ input {
   font-size: 14px;
   font-family: "DM Sans", sans-serif;
 }
-
-input:focus {
+/* In your global CSS file */
+.gradient-border:focus {
   border: 1px solid transparent;
   border-image-source: linear-gradient(354.17deg, #7129FF 3.91%, #FD00E3 72.59%);
   border-image-slice: 1;
   box-shadow: 0px 0px 4px 2px #CC00FF;
   outline: none;
-  background-color: #191918;
 }
 
+.gradient-border-light:focus {
+  border: 1px solid transparent;
+  border-image-source: linear-gradient(354.17deg, #7129FF 3.91%, #FD00E3 72.59%);
+  border-image-slice: 1;
+  box-shadow: 0px 0px 4px 2px rgba(204, 0, 255, 0.5);
+  outline: none;
+}
 textarea {
   color: #757575;
   font-size: 14px;
@@ -2389,10 +2395,10 @@ button {
 
 }
 
-thead {
+/* thead {
   background-color: #1C192A;
   color: white !important;
-}
+} */
 
 .grad_border1 {
   border: 1px solid transparent;

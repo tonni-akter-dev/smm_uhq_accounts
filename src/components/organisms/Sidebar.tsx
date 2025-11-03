@@ -67,9 +67,9 @@ export function Sidebar({ isOpen, onToggle }: SidebarProps) {
         <div className="flex items-center justify-between p-6 mt-6 border-b border-gray-100 dark:border-purple-700/30">
           <div className="flex items-center space-x-3">
             <div>
-              <h3 className='text-[32px] font-bold'>
+              <p className='text-[32px] font-bold dark:text-white! text-black!'>
                 <span className='gradient dark:gradient'>UHQ</span> SMM
-              </h3>
+              </p>
             </div>
           </div>
           <Button

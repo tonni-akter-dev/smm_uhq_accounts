@@ -1,10 +1,10 @@
 'use client';
 
 import * as React from 'react';
-import { Card, CardContent } from '@/components/ui/card';
+import { Card } from '@/components/ui/card';
 import { Button } from '@/components/atoms/Button';
 import { Badge } from '@/components/ui/badge';
-import { Edit2, Trash2, Search } from 'lucide-react';
+import { Edit2, Trash2, Search, ArrowDownToLine } from 'lucide-react';
 import { AddProviderModal } from './AddProviderModal';
 
 // Define a proper interface for Provider
@@ -95,99 +95,112 @@ export function Providers() {
   };
 
   return (
-    <div className="space-y-6 p-4 sm:p-6 lg:space-y-8">
-      {/* Header */}
-
-      <div className='h-[58px] relative '>
+    <div className="space-y-6 p-4 sm:p-6 lg:space-y-10 relative z-50 bg-gray-50 dark:bg-transparent min-h-screen">
+      <div className='h-[58px] relative'>
         <div className='absolute left-4 top-4'>
-          <Search className='text-[#817979]' />
+          <Search className='text-gray-500 dark:text-[#817979]' />
         </div>
-        <input type="text" className='bg-[#FFFFFF0D] grad_border1 px-12 w-full focus:outline-0 h-[58px] rounded-[5px] text-xl text-white' placeholder='Search' />
+        <input
+          type="text"
+          className='bg-white dark:bg-[#FFFFFF0D] border border-gray-300 dark:border-transparent grad_border1 px-12 w-full focus:outline-0 h-[58px] rounded-[5px] text-xl text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400'
+          placeholder='Search'
+        />
       </div>
+
       {/* Add Provider Button */}
-      <div className="flex items-center justify-end mb-4">
-        <Button
-          className="w-full sm:w-auto px-4 py-2 hover:bg-transparent! bg-gray-900/60 border border-purple-600 rounded-full text-white"
-          onClick={() => setIsModalOpen(true)}
-        >
-          + Add Provider
-        </Button>
+      <div className="flex items-center justify-between mb-4">
+        <div></div>
+        <div className="flex items-center space-x-2">
+          <button
+            className="w-full sm:w-auto px-4 py-2 dark:bg-transparent bg-black border border-purple-600 rounded-full text-white"
+            onClick={() => setIsModalOpen(true)}
+          >
+            + Add Provider
+          </button>
+        </div>
       </div>
 
       {/* Table */}
-      <Card className="border-border bg-card">
-        <CardContent className="p-0">
-          <div className="overflow-x-auto">
-            {providers.length === 0 ? (
-              <div className="p-6 text-center text-gray-500">No providers found</div>
-            ) : (
-              <table className="w-full">
-                <thead className="border-b border-border">
-                  <tr className="text-left">
-                    {['ID', 'Name', 'API URL', 'Balance', 'Status', 'Actions'].map((header) => (
-                      <th
-                        key={header}
-                        className="px-6 py-4 text-sm font-medium text-muted-foreground uppercase tracking-wider"
-                      >
-                        {header}
-                      </th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-border">
-                  {providers.map((provider) => (
-                    <tr key={provider._id} className="hover:bg-accent/50 transition-colors">
-                      <td className="px-6 py-4 whitespace-nowrap text-muted-foreground">
-                        {provider._id}
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap font-medium text-foreground">
-                        {provider.name}
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-muted-foreground">
-                        {provider.apiurl}
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-muted-foreground">
-                        ${provider.balance?.toFixed(2) ?? '0.00'}
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <Badge
-                          variant={provider.status === 'Active' ? 'default' : 'secondary'}
-                          className={
-                            provider.status === 'Active'
-                              ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300'
-                              : 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300'
-                          }
-                        >
-                          {provider.status || 'Inactive'}
-                        </Badge>
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="flex items-center space-x-2">
-                          <Button
-                            variant="ghost"
-                            size="icon"
-                            onClick={() => handleEdit(provider._id)}
-                            className="h-8 w-8 text-muted-foreground hover:text-yellow-600 hover:bg-yellow-50 dark:hover:bg-yellow-900/20"
-                          >
-                            <Edit2 className="h-4 w-4" />
-                          </Button>
-                          <Button
-                            variant="ghost"
-                            size="icon"
-                            onClick={() => handleDelete(provider._id)}
-                            className="h-8 w-8 text-muted-foreground hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20"
-                          >
-                            <Trash2 className="h-4 w-4" />
-                          </Button>
-                        </div>
-                      </td>
-                    </tr>
+      <Card className="p-0 bg-white border border-gray-200 dark:border-gray-700 shadow-sm">
+        <div className='pt-6 flex justify-between px-4 mb-4'>
+          <p className='text-xl text-black! dark:text-white!'>Providers</p>
+          <button
+            className='flex gap-3.5 items-center text-gray-700 dark:text-white  dark:hover:text-purple-400 transition-colors'
+            onClick={handleExport}
+          >
+            Export <ArrowDownToLine className='h-3.5' />
+          </button>
+        </div>
+        <div className="overflow-x-auto">
+          {providers.length === 0 ? (
+            <div className="p-6 text-center text-gray-500 dark:text-gray-400">No providers found</div>
+          ) : (
+            <table className="w-full">
+              <thead className="border-b border-gray-200 dark:bg-black dark:border-border">
+                <tr className="text-left">
+                  {['ID', 'Name', 'API URL', 'Balance', 'Status', 'Actions'].map((header) => (
+                    <th
+                      key={header}
+                      className="px-6 py-4 text-sm font-medium text-gray-700 dark:text-white uppercase tracking-wider"
+                    >
+                      {header}
+                    </th>
                   ))}
-                </tbody>
-              </table>
-            )}
-          </div>
-        </CardContent>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-200 dark:divide-border">
+                {providers.map((provider) => (
+                  <tr key={provider._id} className="hover:bg-gray-50 dark:hover:bg-accent/50 transition-colors">
+                    <td className="px-6 py-4 whitespace-nowrap text-gray-600 dark:text-muted-foreground">
+                      {provider._id}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap font-medium text-gray-900 dark:text-foreground">
+                      {provider.name}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-gray-600 dark:text-muted-foreground">
+                      {provider.apiurl}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-gray-600 dark:text-muted-foreground">
+                      ${provider.balance?.toFixed(2) ?? '0.00'}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <Badge
+                        variant={provider.status === 'Active' ? 'default' : 'secondary'}
+                        className={
+                          provider.status === 'Active'
+                            ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400'
+                            : 'bg-gray-100 text-gray-800 dark:bg-gray-700/30 dark:text-gray-400'
+                        }
+                      >
+                        {provider.status || 'Inactive'}
+                      </Badge>
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <div className="flex items-center space-x-0">
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          onClick={() => handleEdit(provider._id)}
+                          className="h-8 w-8 text-gray-600 dark:text-muted-foreground hover:text-yellow-600 hover:bg-yellow-50 dark:hover:bg-yellow-900/20"
+                        >
+                          <Edit2 className="h-4 w-4" />
+                        </Button>
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          onClick={() => handleDelete(provider._id)}
+                          className="h-8 w-8 text-gray-600 dark:text-muted-foreground hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20"
+                        >
+                          <Trash2 className="h-4 w-4" />
+                        </Button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          )}
+        </div>
       </Card>
 
       {/* Add Provider Modal */}
