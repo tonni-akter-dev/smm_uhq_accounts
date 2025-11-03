@@ -128,17 +128,17 @@ export function TicketSupport() {
   };
 
   return (
-    <div className='space-y-6 p-4 sm:p-6 lg:space-y-8'>
+    <div className="space-y-6 p-4 sm:p-6 lg:space-y-10 relative z-50 bg-gray-50 dark:bg-transparent min-h-screen">
       {/* Users Table */}
-      <Card className=" bg-card text-white rounded-lg shadow-lg">
+      <Card className="bg-white dark:bg-transparent text-gray-800 dark:text-white rounded-lg shadow-lg border border-gray-200 dark:border-gray-700">
         <CardContent className="p-6">
           <div className="w-full space-y-6">
             {/* Header */}
-            <h2 className="text-xl font-bold">Ticket #12345</h2>
+            <p className="text-xl font-bold text-black! dark:text-white!">Ticket #12345</p>
 
             {/* Order Information */}
             <div>
-              <h3 className="font-semibold text-purple-400 mb-2 border-b pb-4">Ticket Information</h3>
+              <p className="font-semibold text-purple-600 dark:text-purple-400 mb-2 border-b border-gray-200 dark:border-gray-700 pb-4">Ticket Information</p>
               <div className=" rounded-lg overflow-hidden">
                 <div className="grid grid-cols-1  md:grid-cols-2 ">
                   {[
@@ -151,12 +151,12 @@ export function TicketSupport() {
                   ].map((item, index) => (
                     <div
                       key={index}
-                      className="flex flex-col border-b border-white/5 py-3 "
+                      className="flex flex-col border-b border-gray-200 dark:border-white/5 py-3 "
                     >
-                      <span className="text-xs text-gray-400 uppercase tracking-wider">
+                      <span className="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wider">
                         {item.label}
                       </span>
-                      <span className="text-sm text-gray-200">{item.value}</span>
+                      <span className="text-sm text-gray-700 dark:text-gray-200">{item.value}</span>
                     </div>
                   ))}
                 </div>
@@ -164,11 +164,11 @@ export function TicketSupport() {
             </div>
           </div>
           {/* Chat Section */}
-          <div className="mt-8  from-purple-900/20 to-black/40 text-gray-200 ">
+          <div className="mt-8 bg-white dark:bg-transparent! text-gray-800 dark:text-gray-200 rounded-lg border border-gray-200 dark:border-gray-700">
             <div className="p-6 space-y-6">
               {/* Header */}
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
-                <h3 className="text-lg font-semibold text-white">Message Thread</h3>
+                <p className="text-lg font-semibold text-gray-900 dark:text-white">Message Thread</p>
                 {/* <div className="text-sm text-gray-400">Ticket #12345 • High Priority</div> */}
               </div>
 
@@ -180,15 +180,15 @@ export function TicketSupport() {
                       <img
                         src={message.avatar}
                         alt={message.name}
-                        className="w-8 h-8 rounded-full border border-white/10 object-cover flex-shrink-0"
+                        className="w-8 h-8 rounded-full border border-gray-200 dark:border-white/10 object-cover flex-shrink-0"
                       />
                       <div className={`flex flex-col ${message.sender === 'admin' ? 'items-end' : 'items-start'}`}>
-                        <div className={`${message.sender === 'admin' ? 'bg-[#46214E]' : 'bg-[#241A3E]'} text-[#CED9E0]! px-4 py-3 rounded-2xl ${message.sender === 'admin' ? 'rounded-br-none' : 'rounded-bl-none'}`}>
-                          <p className='text-[#CED9E0]! text-sm'>
+                        <div className={`${message.sender === 'admin' ? 'bg-purple-100 dark:bg-[#46214E]' : 'bg-gray-100 dark:bg-[#241A3E]'} text-gray-800 dark:text-[#CED9E0] px-4 py-3 rounded-2xl ${message.sender === 'admin' ? 'rounded-br-none' : 'rounded-bl-none'}`}>
+                          <p className='text-sm'>
                             {message.content}
                           </p>
                         </div>
-                        <span className="text-xs text-gray-400 mt-1">
+                        <span className="text-xs text-gray-500 dark:text-gray-400 mt-1">
                           {message.name} • {message.timestamp}
                         </span>
                       </div>
@@ -203,14 +203,14 @@ export function TicketSupport() {
                       <img
                         src="https://i.pravatar.cc/40?u=emily2"
                         alt="Emily Carter"
-                        className="w-8 h-8 rounded-full border border-white/10 object-cover flex-shrink-0"
+                        className="w-8 h-8 rounded-full border border-gray-200 dark:border-white/10 object-cover flex-shrink-0"
                       />
                       <div className="flex flex-col items-start">
-                        <div className="bg-[#241A3E] px-4 py-3 rounded-2xl rounded-bl-none text-[#CED9E0]!">
+                        <div className="bg-gray-100 dark:bg-[#241A3E] px-4 py-3 rounded-2xl rounded-bl-none text-gray-800 dark:text-[#CED9E0]">
                           <div className="flex space-x-1">
-                            <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
-                            <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
-                            <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
+                            <div className="w-2 h-2 bg-gray-400 dark:bg-gray-500 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
+                            <div className="w-2 h-2 bg-gray-400 dark:bg-gray-500 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
+                            <div className="w-2 h-2 bg-gray-400 dark:bg-gray-500 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
                           </div>
                         </div>
                       </div>
@@ -223,12 +223,12 @@ export function TicketSupport() {
               </div>
 
               {/* Reply Input */}
-              <div className="border-t border-white/10 pt-4 space-y-4">
+              <div className="border-t border-gray-200 dark:border-white/10 pt-4 space-y-4">
                 <div className='flex gap-3'>
                   <img
                     src="https://i.pravatar.cc/40?u=sarah2"
                     alt="Sarah Miller"
-                    className="w-8 h-8 rounded-full border border-white/10 object-cover flex-shrink-0"
+                    className="w-8 h-8 rounded-full border border-gray-200 dark:border-white/10 object-cover flex-shrink-0"
                   />
                   <div className="flex-1">
                     <input
@@ -237,7 +237,7 @@ export function TicketSupport() {
                       value={inputValue}
                       onChange={(e) => setInputValue(e.target.value)}
                       onKeyPress={handleKeyPress}
-                      className="w-full bg-[#1C192A] border h-12 border-white/10 rounded-lg px-4 py-2 text-sm text-[#CED9E0]! placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-600"
+                      className="w-full bg-white dark:bg-[#1C192A] border h-12 border-gray-300 dark:border-white/10 rounded-lg px-4 py-2 text-sm text-gray-800 dark:text-[#CED9E0] placeholder-gray-500 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 dark:focus:ring-purple-600"
                     />
                   </div>
                 </div>
@@ -245,20 +245,20 @@ export function TicketSupport() {
                 {/* Action Buttons */}
                 <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3">
                   <div className="flex gap-2">
-                    <button className="bg-[#1C192A] text-white px-4 py-2 rounded-lg text-sm transition hover:bg-[#2a2438]">
+                    <button className="bg-gray-100 dark:bg-[#1C192A] text-gray-800 dark:text-white px-4 py-2 rounded-lg text-sm transition hover:bg-gray-200 dark:hover:bg-[#2a2438]">
                       Block User
                     </button>
-                    <button className="bg-[#1C192A] text-white px-4 py-2 rounded-lg text-sm transition hover:bg-[#2a2438]">
+                    <button className="bg-gray-100 dark:bg-[#1C192A] text-gray-800 dark:text-white px-4 py-2 rounded-lg text-sm transition hover:bg-gray-200 dark:hover:bg-[#2a2438]">
                       Change Priority Status
                     </button>
                   </div>
                   <div className="flex gap-2">
-                    <button className="bg-[#1C192A] text-white px-4 py-2 rounded-lg text-sm transition hover:bg-[#2a2438]">
+                    <button className="bg-gray-100 dark:bg-[#1C192A] text-gray-800 dark:text-white px-4 py-2 rounded-lg text-sm transition hover:bg-gray-200 dark:hover:bg-[#2a2438]">
                       Close Ticket
                     </button>
                     <button 
                       onClick={handleSendMessage}
-                      className="bg-[#FD00E3] rounded-[20px] px-4 py-2 text-white text-sm transition hover:bg-[#e100cc]"
+                      className="bg-purple-600 dark:bg-[#FD00E3] rounded-[20px] px-4 py-2 text-white text-sm transition hover:bg-purple-700 dark:hover:bg-[#e100cc]"
                     >
                       Send
                     </button>   

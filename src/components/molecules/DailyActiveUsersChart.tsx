@@ -13,8 +13,8 @@ interface Props {
 
 export function DailyActiveUsersChart({ data }: Props) {
   return (
-    <div className='relative h-64 w-full'>
-      <svg className='h-full w-full' viewBox='0 0 400 200' aria-label='Daily Active Users'>
+    <div className='relative w-full'>
+      <svg className=' w-full' viewBox='0 0 400 200' aria-label='Daily Active Users'>
         <defs>
           <linearGradient id='barGradient' x1='0%' y1='0%' x2='0%' y2='100%'>
             <stop offset='0%' stopColor='#3b82f6' stopOpacity='0.8' />

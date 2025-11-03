@@ -4,7 +4,10 @@ import * as React from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Typography } from '@/components/atoms/Typography';
-import { TrendingUp, Users, UserCheck, UserPlus } from 'lucide-react';
+import { Users, UserCheck, UserPlus } from 'lucide-react';
+import MonthlyProfit from './MonthlyProfit';
+import DailyActiveUsersDesign from './DailyActiveUsers';
+import TopCategoryChart from './TopCategoryChart';
 
 const metricsData = [
   {
@@ -35,42 +38,43 @@ const metricsData = [
 
 export function DashboardContent() {
   return (
-    <div className="space-y-6 p-4 sm:p-6 lg:p-8 xl:p-10">
+    <div className="space-y-6 p-4 sm:p-6 lg:p-8 xl:p-10 bg-gray-50 dark:bg-transparent min-h-screen">
       {/* Metrics Cards */}
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:gap-[60px]">
         {metricsData.map((metric, index) => {
           return (
-            <Card
+            <div
               key={index}
               style={{ backdropFilter: 'blur(23px)', borderRadius: 0 }}
               className="
-             bg-[#252139] transition-transform duration-300 hover:scale-[1.02] rounded-0! border-0 gap-0 mb-[60px]">
+             bg-white dark:bg-[#252139] p-5 transition-transform duration-300 hover:scale-[1.02] rounded-lg shadow-sm dark:shadow-none border border-gray-200 dark:border-0 gap-0 mb-[60px]">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 mb-4">
-                <CardTitle className="text-sm font-light text-[#EFF3F9] sm:text-base">
+                <CardTitle className="text-sm font-light text-gray-800 dark:text-[#EFF3F9] sm:text-base">
                   {metric.title}
                 </CardTitle>
+                <metric.icon className={`h-5 w-5 ${metric.color}`} />
               </CardHeader>
               <CardContent>
-                <div className="text-2xl sm:text-lg font-bold text-[#EFF3F9]">
+                <div className="text-2xl sm:text-lg font-bold text-gray-800 dark:text-[#EFF3F9]">
                   {metric.value}
                 </div>
                 <div className="mt-2 gap-2">
 
                   <Typography
                     variant="small"
-                    className="text-[#03DE73] text-sm"
+                    className="text-green-600 dark:text-[#03DE73] text-sm"
                   >
                     {metric.change}
                   </Typography>
                   <Typography
                     variant="small"
-                    className="text-[#54617A] text-xs mt-3"
+                    className="text-gray-500 dark:text-[#54617A] text-xs mt-3"
                   >
                     {metric.description}
                   </Typography>
                 </div>
               </CardContent>
-            </Card>
+            </div>
           );
         })}
       </div>
@@ -79,147 +83,63 @@ export function DashboardContent() {
       <div>
         <Typography
           variant="h5"
-          className="mb-6 font-semibold text-white text-lg sm:text-xl"
+          className="mb-6 font-semibold text-gray-800 dark:text-white text-lg sm:text-xl"
         >
           User Activity
         </Typography>
 
-        <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 xl:gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 xl:gap-8">
           {/* Monthly Profit Chart */}
-          <Card className="card-hover border-gray-700 bg-gray-800">
+          <div className="border border-gray-200 dark:border-gray-700 gap-0! rounded-2xl pt-4 bg-white dark:bg-transparent shadow-sm dark:shadow-none">
             <CardHeader>
               <div className="flex flex-wrap items-center justify-between gap-3">
                 <div>
-                  <CardTitle className="text-white text-base sm:text-lg">
+                  <CardTitle className="text-gray-800 dark:text-white text-base sm:text-lg">
                     Monthly Profit
                   </CardTitle>
-                  <CardDescription className="text-gray-400 text-sm">
+                  <CardDescription className="text-gray-600 dark:text-gray-400 text-sm">
                     Last 12 Months
                   </CardDescription>
                 </div>
-                <Badge variant="secondary" className="bg-green-100 text-green-800">
+                <Badge variant="secondary" className="bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300">
                   +15%
                 </Badge>
               </div>
             </CardHeader>
             <CardContent>
-              <div className="flex items-center justify-center h-64 sm:h-72 md:h-80">
-                <div className="relative w-full h-full overflow-x-auto">
-                  {/* Responsive SVG */}
-                  <svg
-                    className="h-full w-full min-w-[320px]"
-                    viewBox="0 0 400 200"
-                    preserveAspectRatio="xMidYMid meet"
-                  >
-                    <defs>
-                      <linearGradient
-                        id="profitGradient"
-                        x1="0%"
-                        y1="0%"
-                        x2="0%"
-                        y2="100%"
-                      >
-                        <stop offset="0%" stopColor="#8b5cf6" stopOpacity="0.8" />
-                        <stop offset="100%" stopColor="#ec4899" stopOpacity="0.3" />
-                      </linearGradient>
-                    </defs>
-                    <line x1="50" y1="20" x2="50" y2="180" stroke="#374151" />
-                    <line x1="50" y1="180" x2="350" y2="180" stroke="#374151" />
-                    <polyline
-                      points="70,160 120,140 170,120 220,100 270,80 320,60"
-                      fill="none"
-                      stroke="#8b5cf6"
-                      strokeWidth="3"
-                    />
-                    <polygon
-                      points="70,180 70,160 120,140 170,120 220,100 270,80 320,60 320,180"
-                      fill="url(#profitGradient)"
-                    />
-                    {["Aug", "Sep", "Oct", "Nov", "Dec", "Jan"].map((m, i) => (
-                      <text
-                        key={m}
-                        x={70 + i * 50}
-                        y="195"
-                        textAnchor="middle"
-                        className="fill-gray-400 text-[10px] sm:text-xs"
-                      >
-                        {m}
-                      </text>
-                    ))}
-                  </svg>
+              <div className="flex items-center justify-center ">
+                <div className="relative w-full h-full">
+                  <MonthlyProfit />
                 </div>
               </div>
             </CardContent>
-          </Card>
+          </div>
 
           {/* Daily Active Users Chart */}
-          <Card className="card-hover border-gray-700 bg-gray-800">
+          <div className="border border-gray-200 dark:border-gray-700 gap-0! rounded-2xl pt-4 bg-white dark:bg-transparent shadow-sm dark:shadow-none">
             <CardHeader>
               <div className="flex flex-wrap items-center justify-between gap-3">
                 <div>
-                  <CardTitle className="text-white text-base sm:text-lg">
+                  <CardTitle className="text-gray-800 dark:text-white text-base sm:text-lg">
                     Daily Active Users
                   </CardTitle>
-                  <CardDescription className="text-gray-400 text-sm">
+                  <CardDescription className="text-gray-600 dark:text-gray-400 text-sm">
                     Last 7 Days
                   </CardDescription>
                 </div>
-                <Badge variant="secondary" className="bg-green-100 text-green-800">
+                <Badge variant="secondary" className="bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300">
                   +7%
                 </Badge>
               </div>
             </CardHeader>
             <CardContent>
-              <div className="flex items-center justify-center h-64 sm:h-72 md:h-80">
-                <div className="relative w-full h-full overflow-x-auto">
-                  <svg
-                    className="h-full w-full min-w-[320px]"
-                    viewBox="0 0 400 200"
-                    preserveAspectRatio="xMidYMid meet"
-                  >
-                    <defs>
-                      <linearGradient
-                        id="barGradient"
-                        x1="0%"
-                        y1="0%"
-                        x2="0%"
-                        y2="100%"
-                      >
-                        <stop offset="0%" stopColor="#3b82f6" stopOpacity="0.8" />
-                        <stop offset="100%" stopColor="#8b5cf6" stopOpacity="0.6" />
-                      </linearGradient>
-                    </defs>
-                    <line x1="50" y1="20" x2="50" y2="180" stroke="#374151" />
-                    <line x1="50" y1="180" x2="350" y2="180" stroke="#374151" />
-                    {[...Array(7)].map((_, i) => (
-                      <rect
-                        key={i}
-                        x={70 + i * 40}
-                        y={90 + (i % 3) * 10}
-                        width="30"
-                        height={90 - (i % 3) * 10}
-                        fill="url(#barGradient)"
-                        rx="2"
-                      />
-                    ))}
-                    {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map(
-                      (d, i) => (
-                        <text
-                          key={d}
-                          x={85 + i * 40}
-                          y="195"
-                          textAnchor="middle"
-                          className="fill-gray-400 text-[10px] sm:text-xs"
-                        >
-                          {d}
-                        </text>
-                      )
-                    )}
-                  </svg>
+              <div className="flex items-center justify-center">
+                <div className="relative w-full h-full">
+                  <DailyActiveUsersDesign />
                 </div>
               </div>
             </CardContent>
-          </Card>
+          </div>
         </div>
       </div>
 
@@ -227,31 +147,31 @@ export function DashboardContent() {
       <div>
         <Typography
           variant="h5"
-          className="mb-6 font-semibold text-white text-lg sm:text-xl"
+          className="mb-6 font-semibold text-gray-800 dark:text-white text-lg sm:text-xl"
         >
           Service Usage
         </Typography>
 
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 xl:gap-8">
           {/* Top Services */}
-          <Card className="card-hover border-gray-700 bg-gray-800">
+          <div className="border border-gray-200 dark:border-gray-700 gap-0! rounded-2xl pt-4 bg-white dark:bg-transparent shadow-sm dark:shadow-none">
             <CardHeader>
               <div className="flex flex-wrap items-center justify-between gap-3">
                 <div>
-                  <CardTitle className="text-white text-base sm:text-lg">
+                  <CardTitle className="text-gray-800 dark:text-white text-base sm:text-lg">
                     Top Services
                   </CardTitle>
-                  <CardDescription className="text-gray-400 text-sm">
+                  <CardDescription className="text-gray-600 dark:text-gray-400 text-sm">
                     Last 30 Days
                   </CardDescription>
                 </div>
-                <Badge variant="secondary" className="bg-green-100 text-green-800">
+                <Badge variant="secondary" className="bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300">
                   +10%
                 </Badge>
               </div>
             </CardHeader>
             <CardContent>
-              <div className="space-y-4">
+              <div className="space-y-4 mt-6">
                 {[
                   { name: "Instagram", value: 85 },
                   { name: "Service B", value: 70 },
@@ -261,71 +181,50 @@ export function DashboardContent() {
                 ].map((service, index) => (
                   <div key={index} className="space-y-2">
                     <div className="flex justify-between text-xs sm:text-sm">
-                      <span className="text-gray-300">{service.name}</span>
-                      <span className="font-medium text-white">
+                      <p className="text-gray-600 dark:text-gray-300 w-20">{service.name}</p>
+                      <div className="ml-5 h-6 w-full  bg-gray-200 dark:bg-transparent">
+                        <div
+                          className=" h-6 bg-[#7129FF]"
+                          style={{ width: `${service.value}%` }}
+                        />
+                      </div>
+                      <span className="font-medium text-gray-800 dark:text-white">
                         {service.value}%
                       </span>
-                    </div>
-                    <div className="h-2 w-full rounded-full bg-gray-700">
-                      <div
-                        className="h-2 rounded-full bg-gradient-to-r from-purple-500 to-pink-500"
-                        style={{ width: `${service.value}%` }}
-                      />
                     </div>
                   </div>
                 ))}
               </div>
             </CardContent>
-          </Card>
+          </div>
+
+
+
 
           {/* Top Category */}
-          <Card className="card-hover border-gray-700 bg-gray-800">
+          <div className="border border-gray-200 dark:border-gray-700 gap-0! rounded-2xl pt-4 bg-white dark:bg-transparent shadow-sm dark:shadow-none">
             <CardHeader>
               <div className="flex flex-wrap items-center justify-between gap-3">
                 <div>
-                  <CardTitle className="text-white text-base sm:text-lg">
+                  <CardTitle className="text-gray-800 dark:text-white text-base sm:text-lg">
                     Top Category
                   </CardTitle>
-                  <CardDescription className="text-gray-400 text-sm">
+                  <CardDescription className="text-gray-600 dark:text-gray-400 text-sm">
                     Last 30 Days
                   </CardDescription>
                 </div>
-                <Badge variant="secondary" className="bg-green-100 text-green-800">
+                <Badge variant="secondary" className="bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300">
                   +10%
                 </Badge>
               </div>
             </CardHeader>
             <CardContent>
-              <div className="flex items-center justify-center h-48 sm:h-56">
-                <div className="relative h-32 w-32 sm:h-40 sm:w-40">
-                  <div className="flex items-center justify-center h-full w-full rounded-full bg-gradient-to-r from-purple-500 to-pink-500">
-                    <div className="flex items-center justify-center h-24 w-24 sm:h-28 sm:w-28 rounded-full bg-gray-800">
-                      <Typography variant="h6" className="font-bold text-white">
-                        54%
-                      </Typography>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="mt-4 text-center">
-                <Typography
-                  variant="h6"
-                  className="font-semibold text-white text-sm sm:text-base"
-                >
-                  YouTube Views
-                </Typography>
-                <Typography
-                  variant="small"
-                  className="text-gray-400 text-xs sm:text-sm"
-                >
-                  12,432 Orders
-                </Typography>
-              </div>
+          
+              <TopCategoryChart />
             </CardContent>
-          </Card>
+          </div>
         </div>
       </div>
     </div>
-
   );
 }
