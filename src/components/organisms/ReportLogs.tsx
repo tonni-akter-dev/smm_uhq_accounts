@@ -7,6 +7,7 @@ import { Typography } from '@/components/atoms/Typography';
 import { Badge } from '@/components/ui/badge';
 import { Avatar } from '@/components/ui/avatar';
 import { Eye, Edit2, Trash2, Search, ArrowDownToLine } from 'lucide-react';
+import SearchInput from '@/app/components/SearchInput';
 
 // Mock user data
 const mockUsers = [
@@ -147,103 +148,95 @@ export function ReportLogs() {
 
   const renderTable = () => {
     return (
-      <table className="w-full">
-        <thead className="border-b border-gray-200 dark:bg-[#1C192A] dark:border-border">
-          <tr className="text-left">
-            {[
-              'ID',
-              'IMAGE',
-              'NAME',
-              'SERVICES',
-              'QUANTITY',
-              'LINKS',
-              'STATUS',
-              'ACTION'
-            ].map((header) => (
-              <th
-                key={header}
-                className="px-6 py-4 text-sm font-medium text-gray-700 dark:text-white uppercase tracking-wider"
-              >
-                {header}
-              </th>
-            ))}
+      <table className='w-full'>
+        <thead className='border-b border-gray-200 dark:bg-[#1C192A] dark:border-border'>
+          <tr className='text-left'>
+            {['ID', 'IMAGE', 'NAME', 'SERVICES', 'QUANTITY', 'LINKS', 'STATUS', 'ACTION'].map(
+              (header) => (
+                <th
+                  key={header}
+                  className='px-6 py-4 text-sm font-medium text-gray-700 dark:text-white uppercase tracking-wider'
+                >
+                  {header}
+                </th>
+              )
+            )}
           </tr>
         </thead>
-        <tbody className="divide-y divide-gray-200 dark:divide-border">
+        <tbody className='divide-y divide-gray-200 dark:divide-border'>
           {mockUsers && mockUsers.length > 0 ? (
             mockUsers.map((user) => (
-              <tr key={user.id} className="hover:bg-gray-50 dark:hover:bg-accent/50 transition-colors">
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <Typography variant="small" className="text-gray-600 dark:text-muted-foreground">
+              <tr
+                key={user.id}
+                className='hover:bg-gray-50 dark:hover:bg-accent/50 transition-colors'
+              >
+                <td className='px-6 py-4 whitespace-nowrap'>
+                  <Typography variant='small' className='text-gray-600 dark:text-muted-foreground'>
                     {user.id}
                   </Typography>
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <Avatar className="h-10 w-10">
-                    <div className="flex h-full w-full items-center justify-center rounded-full bg-gradient-to-r from-purple-500 to-pink-500">
-                      <span className="text-sm font-semibold text-white">
+                <td className='px-6 py-4 whitespace-nowrap'>
+                  <Avatar className='h-10 w-10'>
+                    <div className='flex h-full w-full items-center justify-center rounded-full bg-gradient-to-r from-purple-500 to-pink-500'>
+                      <span className='text-sm font-semibold text-white'>
                         {user.name.charAt(0)}
                       </span>
                     </div>
                   </Avatar>
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <Typography variant="small" className="font-medium text-gray-900 dark:text-foreground">
+                <td className='px-6 py-4 whitespace-nowrap'>
+                  <Typography
+                    variant='small'
+                    className='font-medium text-gray-900 dark:text-foreground'
+                  >
                     {user.name}
                   </Typography>
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <Typography variant="small" className="text-gray-600 dark:text-muted-foreground">
+                <td className='px-6 py-4 whitespace-nowrap'>
+                  <Typography variant='small' className='text-gray-600 dark:text-muted-foreground'>
                     {user.email}
                   </Typography>
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <Typography variant="small" className="text-gray-600 dark:text-muted-foreground">
+                <td className='px-6 py-4 whitespace-nowrap'>
+                  <Typography variant='small' className='text-gray-600 dark:text-muted-foreground'>
                     {user.balance}
                   </Typography>
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <Typography variant="small" className="text-gray-600 dark:text-muted-foreground">
+                <td className='px-6 py-4 whitespace-nowrap'>
+                  <Typography variant='small' className='text-gray-600 dark:text-muted-foreground'>
                     {user.totalOrders}
                   </Typography>
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <Badge
-                    variant={user.status === 'Active' ? 'default' : 'secondary'}
-                    className={
-                      user.status === 'Active'
-                        ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400'
-                        : 'bg-gray-100 text-gray-800 dark:bg-gray-700/30 dark:text-gray-400'
-                    }
-                  >
+                <td className='px-6 py-4 whitespace-nowrap'>
+                  <Badge variant={user.status === 'Active' ? 'default' : 'secondary'}>
                     {user.status}
                   </Badge>
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="flex items-center space-x-0">
+                <td className='px-6 py-4 whitespace-nowrap'>
+                  <div className='flex items-center space-x-0'>
                     <Button
-                      variant="ghost"
-                      size="icon"
+                      variant='ghost'
+                      size='icon'
                       onClick={() => handleView(user.id)}
-                      className="h-8 w-8 text-gray-600 dark:text-muted-foreground hover:text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-900/20"
+                      className='h-8 w-8 text-gray-600 dark:text-muted-foreground hover:text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-900/20'
                     >
-                      <Eye className="h-4 w-4" />
+                      <Eye className='h-4 w-4' />
                     </Button>
                     <Button
-                      variant="ghost"
-                      size="icon"
+                      variant='ghost'
+                      size='icon'
                       onClick={() => handleEdit(user.id)}
-                      className="h-8 w-8 text-gray-600 dark:text-muted-foreground hover:text-yellow-600 hover:bg-yellow-50 dark:hover:bg-yellow-900/20"
+                      className='h-8 w-8 text-gray-600 dark:text-muted-foreground hover:text-yellow-600 hover:bg-yellow-50 dark:hover:bg-yellow-900/20'
                     >
-                      <Edit2 className="h-4 w-4" />
+                      <Edit2 className='h-4 w-4' />
                     </Button>
                     <Button
-                      variant="ghost"
-                      size="icon"
+                      variant='ghost'
+                      size='icon'
                       onClick={() => handleDelete(user.id)}
-                      className="h-8 w-8 text-gray-600 dark:text-muted-foreground hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20"
+                      className='h-8 w-8 text-gray-600 dark:text-muted-foreground hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20'
                     >
-                      <Trash2 className="h-4 w-4" />
+                      <Trash2 className='h-4 w-4' />
                     </Button>
                   </div>
                 </td>
@@ -251,7 +244,7 @@ export function ReportLogs() {
             ))
           ) : (
             <tr>
-              <td colSpan={8} className="text-center py-6 text-gray-500 dark:text-muted-foreground">
+              <td colSpan={8} className='text-center py-6 text-gray-500 dark:text-muted-foreground'>
                 No logs found.
               </td>
             </tr>
@@ -262,18 +255,9 @@ export function ReportLogs() {
   };
 
   return (
-    <div className="space-y-6 p-4 sm:p-6 lg:space-y-10 relative z-50 bg-gray-50 dark:bg-transparent min-h-screen">
+    <div className='space-y-6 p-4 sm:p-6 lg:space-y-10 relative z-50 bg-gray-50 dark:bg-transparent min-h-screen'>
       {/* Header */}
-      <div className='h-[58px] relative'>
-        <div className='absolute left-4 top-4'>
-          <Search className='text-gray-500 dark:text-[#817979]' />
-        </div>
-        <input
-          type="text"
-          className='bg-white dark:bg-[#FFFFFF0D] border border-gray-300 dark:border-transparent grad_border1 px-12 w-full focus:outline-0 h-[58px] rounded-[5px] text-xl text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400'
-          placeholder='Search'
-        />
-      </div>
+      <SearchInput />
 
       {/* Tabs */}
       <div className='flex space-x-4 border-b border-gray-200 dark:border-border'>
@@ -281,10 +265,11 @@ export function ReportLogs() {
           <button
             key={tab}
             onClick={() => setActiveTab(tab)}
-            className={`px-4 py-2 text-sm font-medium ${activeTab === tab
-              ? 'text-purple-600 dark:text-purple-400 border-b-2 border-purple-600 dark:border-purple-400'
-              : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
-              }`}
+            className={`px-4 py-2 text-sm font-medium ${
+              activeTab === tab
+                ? 'text-purple-600 dark:text-purple-400 border-b-2 border-purple-600 dark:border-purple-400'
+                : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
+            }`}
           >
             {tab}
           </button>
@@ -292,7 +277,7 @@ export function ReportLogs() {
       </div>
 
       {/* Tab Content */}
-      <Card className="p-0 bg-white border border-gray-200 dark:border-gray-700 shadow-sm">
+      <Card className='p-0 bg-white border border-gray-200 dark:border-gray-700 shadow-sm'>
         <div className='pt-6 flex justify-between px-4 mb-4'>
           <p className='text-xl text-black! dark:text-white!'>{activeTab}</p>
           <button
@@ -302,9 +287,7 @@ export function ReportLogs() {
             Export <ArrowDownToLine className='h-3.5' />
           </button>
         </div>
-        <div className='overflow-x-auto'>
-          {renderTable()}
-        </div>
+        <div className='overflow-x-auto'>{renderTable()}</div>
       </Card>
     </div>
   );

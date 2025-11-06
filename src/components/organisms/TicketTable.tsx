@@ -95,30 +95,30 @@ export function TicketTable() {
   const getPriorityBadgeVariant = (priority: string) => {
     switch (priority) {
       case 'High':
-        return 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400';
+        return 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400 rounded-none';
       case 'Medium':
-        return 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400';
+        return 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400 rounded-none';
       case 'Low':
-        return 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400';
+        return 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400 rounded-none';
       default:
-        return 'bg-gray-100 text-gray-800 dark:bg-gray-700/30 dark:text-gray-400';
+        return 'bg-gray-100 text-gray-800 dark:bg-gray-700/30 dark:text-gray-400 rounded-none';
     }
   };
 
   const getStatusBadgeVariant = (status: string) => {
     switch (status) {
       case 'Open':
-        return 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400';
+        return ' text-[#7598FF] dark:text-[#7598FF] font-medium';
       case 'Closed':
-        return 'bg-gray-100 text-gray-800 dark:bg-gray-700/30 dark:text-gray-400';
+        return ' text-[#D32E2E] dark:text-[#D32E2E] font-medium';
       case 'Answered':
-        return 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400';
+        return ' text-[#00FDA8] dark:text-[#00FDA8] font-medium';
       case 'Pending':
-        return 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400';
+        return ' text-[#D0D32E] dark:text-[#D0D32E] font-medium';
       case 'Approved':
-        return 'bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-400';
+        return ' text-[#00FDA8] dark:text-[#00FDA8] font-medium';
       default:
-        return 'bg-gray-100 text-gray-800 dark:bg-gray-700/30 dark:text-gray-400';
+        return ' text-[#7598FF] dark:text-[#7598FF] font-medium';
     }
   };
 
