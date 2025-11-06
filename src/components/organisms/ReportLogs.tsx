@@ -148,7 +148,7 @@ export function ReportLogs() {
   const renderTable = () => {
     return (
       <table className="w-full">
-        <thead className="border-b border-gray-200 dark:bg-black dark:border-border">
+        <thead className="border-b border-gray-200 dark:bg-[#1C192A] dark:border-border">
           <tr className="text-left">
             {[
               'ID',

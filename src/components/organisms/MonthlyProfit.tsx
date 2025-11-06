@@ -85,17 +85,41 @@ const MonthlyProfit: React.FC = () => {
     },
     scales: {
       x: {
-        grid: { color: 'rgba(255, 255, 255, 0.1)'  },
-        ticks: { color: '#a0a0a0' },
+        grid: { 
+          display: false,
+        },
+        ticks: { 
+          color: '#a0a0a0',
+          // Auto-skip labels on mobile to prevent overlap
+          autoSkip: true,
+          maxTicksLimit: 12,
+        },
       },
       y: {
-        grid: { color: 'rgba(255, 255, 255, 0.1)' },
+        grid: { 
+          display: false,
+        },
         ticks: {
           color: '#a0a0a0',
           callback: (value) => `$${value}`,
         },
       },
     },
+    // Make chart more responsive on smaller screens
+    onResize: (chart, size) => {
+      const dataset = chart.data.datasets[0];
+      // Adjust for mobile screens
+      if (size.width < 640) {
+        // dataset.pointRadius = 3;
+        // dataset.pointHoverRadius = 5;
+        dataset.borderWidth = 2;
+      } else {
+        // Keep desktop values
+        // dataset.pointRadius = 5;
+        // dataset.pointHoverRadius = 7;
+        dataset.borderWidth = 3;
+      }
+    }
   };
 
   return (
@@ -110,14 +134,27 @@ const MonthlyProfit: React.FC = () => {
           max-width: 800px;
           border-radius: 10px;
           padding: 20px;
+          border: none;
         }
         .chart-wrapper {
           height: 300px;
           position: relative;
+          border: none;
         }
         @media (max-width: 768px) {
           .chart-container {
             padding: 15px;
+          }
+          .chart-wrapper {
+            height: 250px;
+          }
+        }
+        @media (max-width: 480px) {
+          .chart-container {
+            padding: 10px;
+          }
+          .chart-wrapper {
+            height: 200px;
           }
         }
       `}</style>

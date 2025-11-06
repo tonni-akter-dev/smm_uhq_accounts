@@ -47,12 +47,11 @@ export function DashboardContent() {
               key={index}
               style={{ backdropFilter: 'blur(23px)', borderRadius: 0 }}
               className="
-             bg-white dark:bg-[#252139] p-5 transition-transform duration-300 hover:scale-[1.02] rounded-lg shadow-sm dark:shadow-none border border-gray-200 dark:border-0 gap-0 mb-[60px]">
+             bg-white dark:bg-[#252139] p-5 transition-transform duration-300 hover:scale-[1.02] rounded-lg shadow-sm dark:shadow-none border border-gray-200 dark:border-0 gap-0 lg:mb-[60px]">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 mb-4">
                 <CardTitle className="text-sm font-light text-gray-800 dark:text-[#EFF3F9] sm:text-base">
                   {metric.title}
                 </CardTitle>
-                <metric.icon className={`h-5 w-5 ${metric.color}`} />
               </CardHeader>
               <CardContent>
                 <div className="text-2xl sm:text-lg font-bold text-gray-800 dark:text-[#EFF3F9]">
@@ -88,7 +87,7 @@ export function DashboardContent() {
           User Activity
         </Typography>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 xl:gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 xl:gap-8">
           {/* Monthly Profit Chart */}
           <div className="border border-gray-200 dark:border-gray-700 gap-0! rounded-2xl pt-4 bg-white dark:bg-transparent shadow-sm dark:shadow-none">
             <CardHeader>
@@ -219,7 +218,6 @@ export function DashboardContent() {
               </div>
             </CardHeader>
             <CardContent>
-          
               <TopCategoryChart />
             </CardContent>
           </div>

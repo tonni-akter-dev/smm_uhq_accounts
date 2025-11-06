@@ -179,13 +179,17 @@ export function UserManagement() {
   return (
     <div className="space-y-6 p-4 sm:p-6 lg:space-y-10 relative z-50 bg-gray-50 dark:bg-transparent min-h-screen">
       <div className='h-[58px] relative'>
-        <div className='absolute left-4 top-4'>
-          <Search className='text-gray-500 dark:text-[#817979]' />
+        <div className='absolute left-4 top-4 z-50'>
+          {/* <Search className='text-gray-500 dark:text-[#817979]' /> */}
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6.5 13C4.68333 13 3.146 12.3707 1.888 11.112C0.63 9.85333 0.000667196 8.316 5.29101e-07 6.5C-0.000666138 4.684 0.628667 3.14667 1.888 1.888C3.14733 0.629333 4.68467 0 6.5 0C8.31533 0 9.853 0.629333 11.113 1.888C12.373 3.14667 13.002 4.684 13 6.5C13 7.23333 12.8833 7.925 12.65 8.575C12.4167 9.225 12.1 9.8 11.7 10.3L17.3 15.9C17.4833 16.0833 17.575 16.3167 17.575 16.6C17.575 16.8833 17.4833 17.1167 17.3 17.3C17.1167 17.4833 16.8833 17.575 16.6 17.575C16.3167 17.575 16.0833 17.4833 15.9 17.3L10.3 11.7C9.8 12.1 9.225 12.4167 8.575 12.65C7.925 12.8833 7.23333 13 6.5 13ZM6.5 11C7.75 11 8.81267 10.5627 9.688 9.688C10.5633 8.81333 11.0007 7.75067 11 6.5C10.9993 5.24933 10.562 4.187 9.688 3.313C8.814 2.439 7.75133 2.00133 6.5 2C5.24867 1.99867 4.18633 2.43633 3.313 3.313C2.43967 4.18967 2.002 5.252 2 6.5C1.998 7.748 2.43567 8.81067 3.313 9.688C4.19033 10.5653 5.25267 11.0027 6.5 11Z" fill="white" />
+          </svg>
+
         </div>
-        <input 
-          type="text" 
-          className='bg-white dark:bg-[#FFFFFF0D] border border-gray-300 dark:border-transparent grad_border1 px-12 w-full focus:outline-0 h-[58px] rounded-[5px] text-xl text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400' 
-          placeholder='Search' 
+        <input
+          type="text"
+          className='bg-white dark:bg-[#FFFFFF0D] border border-gray-300 dark:border-transparent grad_border1 px-12 w-full focus:outline-0 h-[58px] rounded-[5px] text-xl text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400'
+          placeholder='Search'
         />
       </div>
 
@@ -199,7 +203,7 @@ export function UserManagement() {
         </div>
         <div className="overflow-x-auto">
           <table className="w-full">
-            <thead className="border-b border-gray-200 dark:bg-black dark:border-border">
+            <thead className="border-b border-gray-200 dark:bg-[#1C192A] dark:border-border">
               <tr className="text-left">
                 {[
                   'ID',

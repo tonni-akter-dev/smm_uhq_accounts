@@ -1,128 +1,182 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+// import * as React from 'react';
+// import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
+
+// interface TopCategoryChartProps {
+//   theme?: 'light' | 'dark';
+//   percentage?: number;
+//   category?: string;
+//   orders?: number;
+//   days?: number;
+//   change?: number;
+// }
+
+// const TopCategoryChart: React.FC<TopCategoryChartProps> = ({
+//   theme = 'dark',
+//   percentage = 54,
+//   category = 'YouTube Views',
+//   orders = 12433,
+//   days = 10,
+//   change = 10,
+// }) => {
+//   const centerTextColor = theme === 'dark' ? '#ffffff' : '#000000';
+//   const subtitleColor = theme === 'dark' ? '#9ca3af' : '#6b7280';
+//   const otherBackgroundColor = theme === 'dark' ? '#89898938' : '#e5e7eb';
+  
+//   // Data for the pie chart
+//   const data = [
+//     { name: category, value: percentage },
+//     { name: 'Other', value: 100 - percentage },
+//   ];
+  
+//   return (
+//     <div className="flex flex-col items-center justify-center h-full w-full">
+//       {/* Top text: Days and percentage change */}
+//       <div className="mb-2 text-center">
+//         <p className="text-gray-400 text-sm">
+//           {days} Days <span className="text-green-400">+{change}%</span>
+//         </p>
+//       </div>
+      
+//       <div className="relative h-48 w-48 sm:h-56 sm:w-56">
+//         <ResponsiveContainer width="100%" height="100%">
+//           <PieChart>
+//             <Pie
+//               data={data}
+//               cx="50%"
+//               cy="50%"
+//               labelLine={false}
+//               outerRadius={80}
+//               innerRadius={56}
+//               fill="#8884d8"
+//               dataKey="value"
+//               startAngle={90}
+//               endAngle={-270}
+//             >
+//               <Cell fill={`url(#colorGradient-${theme})`} />
+//               <Cell fill={otherBackgroundColor} />
+//             </Pie>
+//             <defs>
+//               <linearGradient id={`colorGradient-${theme}`} x1="0" y1="0" x2="0" y2="1">
+//                 <stop offset="0%" stopColor="#7129FF" />
+//                 <stop offset="100%" stopColor="#BD00FD" />
+//               </linearGradient>
+//             </defs>
+//           </PieChart>
+//         </ResponsiveContainer>
+        
+//         {/* Center text: Percentage */}
+//         <div className="absolute inset-0 flex items-center justify-center">
+//           <span 
+//             className="text-3xl font-bold"
+//             style={{ color: centerTextColor }}
+//           >
+//             {percentage}%
+//           </span>
+//         </div>
+//       </div>
+      
+//       {/* Bottom text: Orders count */}
+//       <div className="mt-2 text-center">
+//         <p 
+//           className="text-sm"
+//           style={{ color: subtitleColor }}
+//         >
+//           {orders.toLocaleString()} Orders
+//         </p>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default TopCategoryChart;
+
+
+
 'use client';
 
 import * as React from 'react';
-import dynamic from 'next/dynamic';
-import {
-  Chart as ChartJS,
-  ArcElement,
-  Tooltip,
-  Legend,
-  ChartOptions,
-  ChartData,
-  Plugin,
-} from 'chart.js';
-
-const Doughnut = dynamic(
-  () => import('react-chartjs-2').then((mod) => mod.Doughnut),
-  { ssr: false }
-);
-
-ChartJS.register(ArcElement, Tooltip, Legend);
+import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
 
 interface TopCategoryChartProps {
   theme?: 'light' | 'dark';
   percentage?: number;
   category?: string;
   orders?: number;
+  days?: number;
+  change?: number;
 }
 
 const TopCategoryChart: React.FC<TopCategoryChartProps> = ({
   theme = 'dark',
   percentage = 54,
   category = 'YouTube Views',
-  orders = 12432,
+  orders = 12433,
+  days = 10,
+  change = 10,
 }) => {
-  const chartRef = React.useRef<ChartJS<'doughnut'> | null>(null);
-  const [gradient, setGradient] = React.useState<string | CanvasGradient>('rgba(189, 0, 253, 0.8)');
-
   const centerTextColor = theme === 'dark' ? '#ffffff' : '#000000';
   const subtitleColor = theme === 'dark' ? '#9ca3af' : '#6b7280';
-  const otherBackgroundColor = theme === 'dark' ? 'rgba(255, 255, 255, 0.08)' : '#e5e7eb';
-
-  const data: ChartData<'doughnut'> = {
-    labels: [category, 'Other'],
-    datasets: [
-      {
-        data: [percentage, 100 - percentage],
-        backgroundColor: [gradient, "#e5e7eb"],
-        borderWidth: 0,
-        hoverOffset: 4,
-      },
-    ],
-  };
-
-  const options: ChartOptions<'doughnut'> = {
-    responsive: true,
-    maintainAspectRatio: false,
-    cutout: '70%',
-    plugins: {
-      legend: { display: false },
-      tooltip: {
-        backgroundColor: '#BD00FD',
-        titleColor: '#ffffff',
-        bodyColor: '#BD00FD',
-        borderColor: '#BD00FD',
-        borderWidth: 1,
-        padding: 10,
-        displayColors: false,
-      },
-    },
-  };
-
-  // ✅ Create gradient when chart is fully initialized
-  React.useEffect(() => {
-    const chart = chartRef.current;
-    if (!chart) return;
-
-    const updateGradient = () => {
-      const { ctx, chartArea } = chart;
-      if (!chartArea) {
-        // Wait until chart area is ready
-        requestAnimationFrame(updateGradient);
-        return;
-      }
-      const newGradient = ctx.createLinearGradient(0, chartArea.bottom, 0, chartArea.top);
-      newGradient.addColorStop(0, '#BD00FD');
-      newGradient.addColorStop(1, '#BD00FD');
-      setGradient(newGradient);
-    };
-
-    updateGradient();
-  }, [theme]);
-
-  const centerTextPlugin: Plugin<'doughnut'> = {
-    id: 'centerText',
-    beforeDraw(chart) {
-      const { ctx, width, height } = chart;
-      ctx.save();
-      ctx.font = 'bold 34px sans-serif';
-      ctx.textBaseline = 'middle';
-      ctx.textAlign = 'center';
-      ctx.fillStyle = centerTextColor;
-      ctx.fillText(`${percentage}%`, width / 2, height / 2);
-      ctx.restore();
-    },
-  };
-
-  React.useEffect(() => {
-    ChartJS.register(centerTextPlugin);
-    return () => {
-      ChartJS.unregister(centerTextPlugin);
-    };
-  }, [percentage, centerTextColor]);
-
+  const otherBackgroundColor = theme === 'dark' ? '#89898938' : '#e5e7eb';
+  
+  // Data for the pie chart
+  const data = [
+    { name: category, value: percentage },
+    { name: 'Other', value: 100 - percentage },
+  ];
+  
   return (
-    <div className="flex flex-col items-center justify-center h-full w-full">
-      <div className="relative h-48 w-48 sm:h-56 sm:w-56">
-        <Doughnut ref={chartRef} data={data} options={options} />
-      </div>
-      <div className="mt-4 text-center">
-        <p className="font-semibold text-black dark:text-white text-sm sm:text-base">
-          {category}
+    <div className="flex flex-col items-center justify-center h-full w-full border-0">
+      {/* Top text: Days and percentage change */}
+      <div className="mb-2 text-center">
+        <p className="text-gray-400 text-sm">
+          {days} Days <span className="text-green-400">+{change}%</span>
         </p>
-        <p
-          className="text-gray-800 dark:text-gray-400 text-xs sm:text-sm"
+      </div>
+      
+      <div className="relative h-48 w-48 sm:h-56 sm:w-56">
+        <ResponsiveContainer width="100%" height="100%">
+          <PieChart>
+            <Pie
+              data={data}
+              cx="50%"
+              cy="50%"
+              labelLine={false}
+              outerRadius={80}
+              innerRadius={56}
+              fill="#8884d8"
+              dataKey="value"
+              startAngle={90}
+              endAngle={-270}
+            >
+              <Cell fill={`url(#colorGradient-${theme})`} />
+              <Cell fill={otherBackgroundColor} />
+            </Pie>
+            <defs>
+              <linearGradient id={`colorGradient-${theme}`} x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="#7129FF" />
+                <stop offset="100%" stopColor="#BD00FD" />
+              </linearGradient>
+            </defs>
+          </PieChart>
+        </ResponsiveContainer>
+        
+        {/* Center text: Percentage */}
+        <div className="absolute inset-0 flex items-center justify-center">
+          <span 
+            className="text-3xl font-bold"
+            style={{ color: centerTextColor }}
+          >
+            {percentage}%
+          </span>
+        </div>
+      </div>
+      
+      {/* Bottom text: Orders count */}
+      <div className="mt-2 text-center">
+        <p 
+          className="text-sm"
+          style={{ color: subtitleColor }}
         >
           {orders.toLocaleString()} Orders
         </p>

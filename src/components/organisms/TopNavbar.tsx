@@ -1,11 +1,14 @@
 'use client';
-
 import * as React from 'react';
 import { Button } from '@/components/atoms/Button';
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator } from '@/components/ui/dropdown-menu';
-import { Bell, Menu, LogOut, User } from 'lucide-react';
+import { Menu, LogOut, User, ChevronDown } from 'lucide-react';
 import { ThemeToggle } from '@/components/molecules/ThemeToggle';
 import { useAuth } from "@/context/AuthContext";
+import search from '../../../public/search.png';
+import bell from '../../../public/bell.png'; 
+import setting from '../../../public/setting.png'; 
+import Image from 'next/image';
 
 interface TopNavbarProps {
   onMenuToggle: () => void;
@@ -16,41 +19,58 @@ export function TopNavbar({ onMenuToggle, pageTitle = 'Dashboard' }: TopNavbarPr
   const { user, logout } = useAuth();
 
   return (
-    <header className='absolute top-0 right-0 left-0 z-40 bg-white dark:bg-transparent! border-b border-gray-200 dark:border-transparent lg:left-64'>
+    <header className='absolute top-10 right-0 left-0 z-40 bg-white dark:bg-transparent border-b border-gray-200 dark:border-transparent ps-4 lg:left-64'>
       <div className='flex h-16 items-center justify-between px-4 lg:px-6'>
         {/* Left Section */}
-        <div className='flex items-center space-x-4'>
-          {/* Mobile Menu Button */}
-          <Button
-            variant='ghost'
-            size='icon'
-            onClick={onMenuToggle}
-            className='text-gray-600 hover:text-gray-900 hover:bg-gray-100 dark:text-muted-foreground dark:hover:bg-accent dark:hover:text-foreground lg:hidden'
-          >
-            <Menu className='h-5 w-5' />
-          </Button>
-
-          {/* Page Title */}
-          <p className='font-semibold text-2xl text-gray-900! dark:text-white!'>
-            {pageTitle}
-          </p>
-
-
+        <div className='flex-1 min-w-0'>
+          <p className='text-base text-[#898989]  hidden sm:block'>Dashboard</p>
+          <div className='flex items-center space-x-2 sm:space-x-4'>
+            {/* Mobile Menu Button */}
+            <Button
+              variant='ghost'
+              size='icon'
+              onClick={onMenuToggle}
+              className='text-gray-600 hover:text-gray-900 hover:bg-gray-100 dark:text-muted-foreground dark:hover:bg-accent dark:hover:text-foreground lg:hidden'
+            >
+              <Menu className='h-5 w-5' />
+            </Button>
+            {/* Page Title */}
+            <p className='text-xl sm:text-2xl lg:text-[38px] text-gray-900 dark:text-white! truncate'>
+              {pageTitle}
+            </p>
+            <div className='hidden items-center space-x-2 md:flex'>
+              <button className='border-border bg-[#7C23FE] px-4 py-2 rounded-full text-white flex gap-3 items-center text-foreground'>
+                08/21/2018
+                <ChevronDown className='ml-2 h-4 w-4' />
+              </button>
+            </div>
+          </div>
         </div>
 
         {/* Right Section */}
-        <div className='flex items-center space-x-2 lg:space-x-4'>
-          {/* Theme Toggle */}
+        <div className='flex items-center space-x-1 sm:space-x-2 lg:space-x-3'>
           <ThemeToggle />
-
-          {/* Notifications */}
           <Button
             variant='ghost'
             size='icon'
-            className='relative text-gray-600 hover:text-gray-900 hover:bg-gray-100 dark:text-muted-foreground dark:hover:bg-accent dark:hover:text-foreground'
+            className='text-[#DADADA] h-9 w-9 sm:h-10 sm:w-10'
           >
-            <Bell className='h-5 w-5' />
-            <span className='absolute -top-1 -right-1 h-3 w-3 rounded-full bg-red-500'></span>
+            <Image className='h-4 w-4 sm:h-4.5 sm:w-4.5' src={search} alt="" />
+          </Button>
+          <Button
+            variant='ghost'
+            size='icon'
+            className='text-[#DADADA] relative h-9 w-9 sm:h-10 sm:w-10'
+          >
+            <Image className='h-4 w-4 sm:h-4.5 sm:w-4.5' src={bell} alt="" />
+            <span className='absolute top-2 right-2.5 z-50 h-2 w-2 rounded-full bg-red-500'></span>
+          </Button>
+          <Button
+            variant='ghost'
+            size='icon'
+            className='text-[#DADADA] h-9 w-9 sm:h-10 sm:w-10'
+          >
+            <Image className='h-4 w-4 sm:h-4.5 sm:w-4.5' src={setting} alt="" />
           </Button>
 
           {/* Profile Dropdown */}
@@ -78,7 +98,6 @@ export function TopNavbar({ onMenuToggle, pageTitle = 'Dashboard' }: TopNavbarPr
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
-
         </div>
       </div>
     </header>

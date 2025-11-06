@@ -136,7 +136,7 @@ export function Providers() {
             <div className="p-6 text-center text-gray-500 dark:text-gray-400">No providers found</div>
           ) : (
             <table className="w-full">
-              <thead className="border-b border-gray-200 dark:bg-black dark:border-border">
+              <thead className="border-b border-gray-200 dark:bg-[#1C192A] dark:border-border">
                 <tr className="text-left">
                   {['ID', 'Name', 'API URL', 'Balance', 'Status', 'Actions'].map((header) => (
                     <th
