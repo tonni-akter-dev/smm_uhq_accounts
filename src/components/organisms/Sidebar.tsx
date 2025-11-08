@@ -59,7 +59,7 @@ export function Sidebar({ isOpen, onToggle }: SidebarProps) {
       {/* Sidebar */}
       <div
         className={cn(
-          'sidebar-transition fixed top-0 left-0 z-50 h-full w-64 bg-white dark:bg-[#1C192A] border-r border-gray-200 dark:border-purple-700/30 lg:translate-x-0',
+          'sidebar-transition fixed top-0 left-0 z-[999] h-full w-64 bg-white dark:bg-[#1C192A] border-r border-gray-200 dark:border-purple-700/30 lg:translate-x-0',
           isOpen ? 'translate-x-0' : '-translate-x-full'
         )}
       >

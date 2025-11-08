@@ -41,7 +41,7 @@ export default function DashboardLayout({
   };
 
   return (
-    <div className='min-h-screen relative bg-[#1C192A] dash_bg'>
+    <div className='min-h-screen relative dark:bg-[#1C192A] dash_bg'>
       {/* Sidebar */}
       <Sidebar
         isOpen={sidebarOpen}

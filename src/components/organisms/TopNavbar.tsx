@@ -19,7 +19,7 @@ export function TopNavbar({ onMenuToggle, pageTitle = 'Dashboard' }: TopNavbarPr
   const { user, logout } = useAuth();
 
   return (
-    <header className='absolute top-10 right-0 left-0 z-40 bg-white dark:bg-transparent border-b border-gray-200 dark:border-transparent ps-4 lg:left-64'>
+    <header className='absolute top-0 py-8 right-0 left-0 z-40 bg-white dark:bg-transparent  border-gray-200 dark:border-transparent ps-4 lg:left-64'>
       <div className='flex h-16 items-center justify-between px-4 lg:px-6'>
         {/* Left Section */}
         <div className='flex-1 min-w-0'>
